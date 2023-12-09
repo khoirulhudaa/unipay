@@ -26,6 +26,7 @@ import Woman2 from './woman2.svg'
 import Woman3 from './woman3.svg'
 import IKMI from './ikmi.png'
 import Transfer from './transfer.png'
+import Success from './success.svg'
 
 export {
     Card,
@@ -55,5 +56,6 @@ export {
     Woman2,
     Woman3,
     IKMI,
-    Transfer
+    Transfer,
+    Success
 }
