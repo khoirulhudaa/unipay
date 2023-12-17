@@ -77,7 +77,7 @@ const Home = () => {
       <Alert />
       
       {/* Sidebar */}
-      <Sidebar show={show} onClick={() => handleFormAdmin('top-up', 'top-up')} />
+      <Sidebar show={show} onClick={() => handleFormAdmin('Top-up', 'Top-up')} />
 
       <div className='absolute z-[99999] right-4 top-6 rounded-lg border border-blue-500 w-[50px] h-[50px] flex md:hidden flex-col justify-center items-center cursor-pointer hover:brightness-[90%] active:scale-[0.98]' onClick={() => setShow(!show)}>
         <div className='w-full h-max flex flex-col justify-between items-center justify-between cursor-pointer hover:brightness-[90%] active:scale-[0.98]'>

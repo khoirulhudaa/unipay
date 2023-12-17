@@ -119,7 +119,7 @@ const listPayment = [
 ]
 
 switch(type) {
-    case "top-up":
+    case "Top-up":
         return (
             <form onSubmit={formikTopUp.handleSubmit} className='z-[999999]'>
                 <div className='mb-5'>
