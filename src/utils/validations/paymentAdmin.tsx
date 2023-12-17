@@ -16,6 +16,8 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
         validationSchema: Yup.object({
             amount: Yup.number()
             .required('Tidak boleh kosong!'),
+            note: Yup.string()
+            .required('Tidak boleh kosong!')
         }),
         onSubmit: async (values: any, { resetForm }) => {
 
@@ -31,6 +33,8 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
                 note: values.note,
                 classRoom: values.classRoom
             }
+
+            console.log('data values:', data)
 
             const response = await API.transfer(data)
             console.log('response signup:', response) 
