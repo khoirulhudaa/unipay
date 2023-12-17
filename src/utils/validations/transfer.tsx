@@ -28,7 +28,7 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onRespo
             const data = {
                 amount: values.amount,
                 email: auth ? auth.email : '',
-                description: 'TRANSFER',
+                description: `TRANSFER_${values.NIM}`,
                 typePayment: localStorage.getItem('typePayment') ?? '',
                 fullName: auth ? auth.fullName : '',
                 number_telephone: auth ? auth.number_telephone : '',
