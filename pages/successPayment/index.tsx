@@ -1,9 +1,10 @@
-import { Success } from '@/public/images'
 import Button from '@/components/button'
 import Sidebar from '@/components/sidebar'
+import { Success } from '@/public/images'
+import ProviderMain from '@/redux/provider'
+import store from '@/redux/store'
 import Image from 'next/image'
 import Link from 'next/link'
-import React from 'react'
 
 const SuccessPayment = () => {
   return (
@@ -24,4 +25,9 @@ const SuccessPayment = () => {
   )
 }
 
-export default SuccessPayment
+export default () => (
+  <ProviderMain store={store}>
+    <SuccessPayment />
+  </ProviderMain>
+);
+
