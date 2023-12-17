@@ -9,12 +9,15 @@ export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, on
     const auth = store.getState().authSlice.auth
     const formik = useFormik<paymentInterface>({
         initialValues: {
-            amount: 0
+            amount: 0,
+            classRoom: ''
         },
         validationSchema: Yup.object({
             amount: Yup.number()
             .min(9999, 'Minimal Rp. 1.000 (one Thousand)')
             .required('Tidak boleh kosong!'),
+            classRoom: Yup.string()
+            .required('Tidak boleh kosong!')
         }),
         onSubmit: async (values: any, { resetForm }) => {
             const data = {
@@ -26,7 +29,8 @@ export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, on
                 typePayment: 'top-up',
                 NIM: auth ? auth.NIM : '',
                 to: 'Admin Kampus',
-                year: auth ? auth.year : ''
+                year: auth ? auth.year : '',
+                classRoom: values.classRoom
             }
 
             const response = await API.transfer(data)

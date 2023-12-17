@@ -21,35 +21,35 @@ export const signupUseFormik = ({ onError, onResponse }: {onError: any, onRespon
         validationSchema: Yup.object({
             email: Yup.string()
             .email('Invalid email address')
-            .required('This field is required.'),
+            .required('Tidak boleh kosong!'),
             password: Yup.string()
-            .min(8, 'Minimal must 8 characters.')
-            .max(20, 'Maximum only 20 characters.')
-            .required('This field is required.'),
+            .min(8, 'Minimal 8 karakter')
+            .max(20, 'Maksimal 20 karakter')
+            .required('Tidak boleh kosong!'),
             fullName: Yup.string()
-            .min(3, 'Minimal must 3 characters.')
-            .max(20, 'Maximum only 20 characters.')
-            .required('This field is required.'),
+            .min(3, 'Minimal 3 karakter')
+            .max(20, 'Maksimal 20 karakter')
+            .required('Tidak boleh kosong!'),
             NIK: Yup.string()
-            .max(16, 'Maximum only 16 characters.')
-            .required('This field is required.'),
+            .max(16, 'Maksimal 16 karakter')
+            .required('Tidak boleh kosong!'),
             NIM: Yup.string()
-            .max(8, 'Maximum only 8 characters.')
-            .required('This field is required.'),
+            .max(8, 'Maksimal 8 karakter')
+            .required('Tidak boleh kosong!'),
             number_telephone: Yup.string()
-            .min(10, 'Minimal must 10 characters.')
-            .max(13, 'Maximum only 13 characters.')
-            .required('This field is required.'),
+            .min(10, 'Minimal 10 karakter')
+            .max(13, 'Maksimal 13 karakter')
+            .required('Tidak boleh kosong!'),
             prodi: Yup.string()
-            .required('This field is required.'),
+            .required('Tidak boleh kosong!'),
             accountNumber: Yup.string()
-            .min(10, 'Minimal must 10 characters.')
-            .max(15, 'Maximum only 15 characters.')
-            .required('This field is required.'),
+            .min(10, 'Minimal 10 karakter')
+            .max(15, 'Maksimal 15 karakter')
+            .required('Tidak boleh kosong!'),
             year: Yup.string()
-            .min(4, 'Minimal must 4 characters.')
-            .max(4, 'Maximum only 4 characters.')
-            .required('This field is required.'),
+            .min(4, 'Minimal 4 karakter')
+            .max(4, 'Maksimal 4 karakter')
+            .required('Tidak boleh kosong!'),
         }),
         onSubmit: async (values: any, { resetForm }) => {
             const response = await API.signUp(values)

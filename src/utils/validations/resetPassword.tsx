@@ -15,8 +15,8 @@ export const resetPasswordUseFormik = ({ onError, onResponse }: {onError: any, o
         },
         validationSchema: Yup.object({
             password: Yup.string()
-            .min(8, 'Minimal must 8 characters.')
-            .max(20, 'Maximum only 20 characters.')
+            .min(8, 'Minimal 8 karakter')
+            .max(20, 'Maksimal 20 karakter')
         }),
         onSubmit: async (values: any, { resetForm }) => {
             if(token) {

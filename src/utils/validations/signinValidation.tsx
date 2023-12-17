@@ -20,11 +20,11 @@ export const signinUseFormik = ({ onError }: {onError: any}) => {
         },
         validationSchema: Yup.object({
             NIM: Yup.string()
-            .min(6, 'Minimal must 6 characters.')
-            .required('This field is required.'),
+            .min(6, 'Minimal 6 karakter')
+            .required('Tidak boleh kosong!'),
             password: Yup.string()
-            .max(20, 'Maximum only 20 characters.')
-            .required('This field is required.'),
+            .max(20, 'Maksimal 20 karakter')
+            .required('Tidak boleh kosong!'),
         }),
         onSubmit: async (values: any, { resetForm }) => {
             const response = await API.signiIn(values)

@@ -134,6 +134,17 @@ switch(type) {
                         placeholder="100.000" 
                     />
                 </div>
+                <div className='mb-5'>
+                    <InputField 
+                        label='Kelas (Anda)'
+                        name='classRoom'
+                        onError={formikTopUp.errors.classRoom}
+                        onTouched={!!formikTopUp.touched.classRoom}
+                        onChange={formikTopUp.handleChange} 
+                        onBlur={formikTopUp.handleBlur} 
+                        placeholder="XX-20XX-PX" 
+                    />
+                </div>
                 <div className='flex items-center'>
                     <Button text='Kirim sekarang' typeButton='submit' status='primary' style='mr-4' />
                     <Button text='Batalkan' status='delete' handleClick={onClick} />
@@ -176,6 +187,17 @@ switch(type) {
                         onChange={formikAdmin.handleChange} 
                         onBlur={formikAdmin.handleBlur} 
                         placeholder="Berikan deskripsi (jika perlu)..." 
+                    />
+                </div>
+                <div className='mb-5'>
+                    <InputField 
+                        label='Kelas (Anda)'
+                        name='classRoom'
+                        onError={formikAdmin.errors.classRoom}
+                        onTouched={!!formikAdmin.touched.classRoom}
+                        onChange={formikAdmin.handleChange} 
+                        onBlur={formikAdmin.handleBlur} 
+                        placeholder="XX-20XX-PX" 
                     />
                 </div>
                 <div className='flex items-center'>
@@ -221,6 +243,17 @@ switch(type) {
                         onChange={formikWithdraw.handleChange} 
                         onBlur={formikWithdraw.handleBlur} 
                         placeholder="Rp.1.000" 
+                    />
+                </div>
+                <div className='mb-5'>
+                    <InputField 
+                        label='Kelas (Anda)'
+                        name='classRoom'
+                        onError={formikWithdraw.errors.classRoom}
+                        onTouched={!!formikWithdraw.touched.classRoom}
+                        onChange={formikWithdraw.handleChange} 
+                        onBlur={formikWithdraw.handleBlur} 
+                        placeholder="XX-20XX-PX" 
                     />
                 </div>
                 <div className='flex items-center'>
@@ -560,6 +593,17 @@ switch(type) {
                     onBlur={formik.handleBlur} 
                     placeholder="1.000" 
                 />
+                </div>
+                <div className='mb-5'>
+                    <InputField 
+                        label='Kelas (Anda)'
+                        name='classRoom'
+                        onError={formikAdmin.errors.classRoom}
+                        onTouched={!!formikAdmin.touched.classRoom}
+                        onChange={formikAdmin.handleChange} 
+                        onBlur={formikAdmin.handleBlur} 
+                        placeholder="XX-20XX-PX" 
+                    />
                 </div>
                 <div className='flex items-center'>
                     <Button text='Kirim sekarang' typeButton='submit' status='primary' style='mr-4' />

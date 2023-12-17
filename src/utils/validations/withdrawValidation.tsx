@@ -16,17 +16,20 @@ export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, 
             bank_code: '',
             account_number: 0,
             amount: 0,
+            classRoom: ''
         },
         validationSchema: Yup.object({
             bank_code: Yup.string()
             .required(),
             account_number: Yup.number()
-            .max(9999999999999999, 'Maximum only 16 characters.')
-            .min(9999999999, 'Minimal must 10 characters.')
+            .max(9999999999999999, 'Masimal 16 karakter.')
+            .min(9999999999, 'Minimal 10 karakter.')
             .required(),
             amount: Yup.number()
-            .min(9999, 'Minimal must Rp. 10.000.')
-            .required()
+            .min(9999, 'Minimal nominal Rp. 10.000.')
+            .required(),
+            classRoom: Yup.string()
+            .required('Tidak boleh kosong!')
         }),
         onSubmit: async (values: any, {resetForm}) => {
             try {
@@ -35,7 +38,8 @@ export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, 
                     accountNumber: values.account_number,
                     amount: values.amount,
                     user_id: auth?.fullName,
-                    accountHolderName: auth?.fullName
+                    accountHolderName: auth?.fullName,
+                    classRoom: values.classRoom
                 }
 
                 console.log('values:', data)

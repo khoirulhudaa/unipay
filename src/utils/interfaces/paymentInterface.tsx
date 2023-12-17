@@ -5,5 +5,6 @@ export interface paymentInterface {
     bank_code?: string,
     account_number?: number,
     NIM?: string,
-    year?: string
+    year?: string,
+    classRoom?: string
 }

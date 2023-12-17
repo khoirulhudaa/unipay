@@ -12,7 +12,8 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onRespo
         initialValues: {
             amount: 0,
             typePayment: '',
-            NIM: ''
+            NIM: '',
+            classRoom: ''
         },
         validationSchema: Yup.object({
             amount: Yup.number()
@@ -22,6 +23,8 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onRespo
             .min(6, 'Minimal 6 numbers')
             .max(6, 'Maksimal 6 numbers')
             .required('Tidak boleh kosong!'),
+            classRoom: Yup.string()
+            .required('Tidak boleh kosong!')
         }),
         onSubmit: async (values: any, { resetForm }) => {
 

@@ -10,8 +10,8 @@ export const forgotPasswordUseFormik = ({ onError, onResponse }: {onError: any, 
         },
         validationSchema: Yup.object({
             email: Yup.string()
-            .email('Invalid email address')
-            .required('This field is required.'),
+            .email('Format email tidak sesuai')
+            .required('Tidak boleh kosong!'),
         }),
         onSubmit: async (values: any, { resetForm }) => {
            const response = await API.sendEmailResetPassword(values)

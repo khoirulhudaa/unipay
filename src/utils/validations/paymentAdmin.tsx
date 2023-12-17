@@ -15,7 +15,7 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
         },
         validationSchema: Yup.object({
             amount: Yup.number()
-            .required('This field is required.'),
+            .required('Tidak boleh kosong!'),
         }),
         onSubmit: async (values: any, { resetForm }) => {
 
