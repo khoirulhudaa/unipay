@@ -23,15 +23,16 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
 
             const data = {
                 amount: values.amount,
+                fullName: auth ? auth.fullName : '',
+                number_telephone: auth ? auth.number_telephone : '',
                 email: auth ? auth.email : '',
                 description: `Pembayaran ${values.typePayment}`,
                 typePayment: localStorage.getItem('typePayment') ?? '',
-                fullName: auth ? auth.fullName : '',
-                number_telephone: auth ? auth.number_telephone : '',
-                user_id: auth ? auth.user_id : '',
                 year: auth ? auth.year : '',
+                NIM: auth ? auth.NIM : '',
+                to: 'Admin kampus',
                 note: values.note,
-                classRoom: values.classRoom
+                classRoom: values.classRoom,
             }
 
             console.log('data values:', data)
