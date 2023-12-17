@@ -26,7 +26,7 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
                 fullName: auth ? auth.fullName : '',
                 number_telephone: auth ? auth.number_telephone : '',
                 email: auth ? auth.email : '',
-                description: `Pembayaran ${values.typePayment}`,
+                description: `Administrasi`,
                 typePayment: localStorage.getItem('typePayment') ?? '',
                 year: auth ? auth.year : '',
                 NIM: auth ? auth.NIM : '',
