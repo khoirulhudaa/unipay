@@ -1,3 +1,4 @@
+'use client'
 import '@/app/globals.css'
 import SweetAlert from '@/components/alert/sweetAlert'
 import FormGroup from '@/components/formGroup'
@@ -6,31 +7,35 @@ import ProviderMain from '@/redux/provider'
 import store from '@/redux/store'
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { FaArrowLeft } from 'react-icons/fa'
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
+ 
+  const navigate = useRouter()
 
-const [statusAuth, setStatusAuth] = useState<boolean>(false)
-const [errorMessage, setErrorMessage] = useState<string>("")
+  const [errorMessage, setErrorMessage] = useState<string>("")
 
-const handleResponse = (response: string) => {
-    if(response === "Email sent successfully!") {
-        setErrorMessage("")
-        SweetAlert({
-            text:'Pesan email terkirim!',
-            title: 'Success',
-            icon: 'success',
-            showConfirmButton: true,
-            showCancelButton: false
-        })
+  const handleResponse = (response: string) => {
+    if(response === "Password successfully reset!") {
+      setErrorMessage("")
+      SweetAlert({
+        text:'Berhasil perbarui password!',
+        title: 'Success',
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonText: 'Masuk kembali',
+        navigate: navigate,
+        route: '/auth'
+      })
     }
-}
+  }
 
-const handleErrorMessage = (error: string) => {
+  const handleErrorMessage = (error: string) => {
     setErrorMessage(error)
-}
-
+  }
+ 
   return (
     <div className='fixed w-screen h-screen bg-blue-500 flex items-center justify-center'>
         <Link href={'/auth'}>
@@ -43,19 +48,17 @@ const handleErrorMessage = (error: string) => {
             alt='card'
             className='absolute scale-[2] opacity-[0.4]'
         />
-
         <div className='w-full md:w-1/2 z-40 px-4 flex items-center justify-center'>
             <div className='w-full md:w-[80%] h-max rounded-lg p-8 bg-blue-100 shadow-md'>
-                <FormGroup type='forgotPassword' handleErrorMessage={(e) => handleErrorMessage(e)} handleResponse={(e) => handleResponse(e)} error={errorMessage} />
+                <FormGroup type='ResetPassword' handleErrorMessage={(e) => handleErrorMessage(e)} handleResponse={(e) => handleResponse(e)} error={errorMessage} />
             </div>
         </div>
-
     </div>
   )
 }
 
 export default () => (
     <ProviderMain store={store}>
-      <ForgotPassword />
+      <ResetPassword />
     </ProviderMain>
 );

@@ -1,5 +1,5 @@
 import { paymentAdminUseFormik } from '@/utils/validations/paymentAdmin'
-import { paymentUseFormik } from '@/utils/validations/paymentValidation'
+import { paymentUseFormik } from '@/utils/validations/topUpValidation'
 import { paymentWithdrawUseFormik } from '@/utils/validations/withdrawValidation'
 import Button from '../button'
 import InputField from '../inputField'
@@ -9,14 +9,18 @@ import { signinUseFormik } from '@/utils/validations/signinValidation'
 import { forgotPasswordUseFormik } from '@/utils/validations/forgotPassword'
 import { resetPasswordUseFormik } from '@/utils/validations/resetPassword'
 import { updateProfileUseFormik } from '@/utils/validations/updateProfile'
+import ErrorMessage from '../errorMessage'
+import { useEffect } from 'react'
 
 interface formGroupProps {
     type?: string,
-    handleErrorMessage?: () => void,
-    handleResponse?: () => void,
+    handleErrorMessage?: (args: string) => void,
+    handleResponse?: (args: string) => void,
     typePayment?: string,
     onClick?: () => void,
-    onClick2?: () => void
+    onClick2?: () => void,
+    error?: string,
+    typePhoto?: string
 }
 
 const FormGroup = ({ 
@@ -24,7 +28,9 @@ const FormGroup = ({
     handleErrorMessage, 
     handleResponse,
     onClick,
-    onClick2
+    onClick2,
+    error,
+    typePhoto
 }: formGroupProps) => {
 
 // Transfer original 
@@ -54,7 +60,6 @@ const formikSignup = signupUseFormik({
 // Transfer withdraw 
 const formikSignin = signinUseFormik({ 
     onError: handleErrorMessage, 
-    onResponse: handleResponse 
 })
 
 // Transfer withdraw 
@@ -75,6 +80,10 @@ const formikUpdateProfile = updateProfileUseFormik({
     onResponse: handleResponse 
 })
 
+useEffect(() => {
+    formikUpdateProfile.setFieldValue('type_photo', typePhoto)
+}, [typePhoto])
+
 const genderList = [
     {label: 'Select your gender', value: ''},
     {label: 'Male', value: 'Male'},
@@ -87,6 +96,19 @@ const prodiList = [
     {label: 'RPL', value: 'Rekayasa Perangkat Lunak'},
     {label: 'SI', value: 'Sistem Informasi'},
     {label: 'MK', value: 'Manajemen komputerisasi'}
+]
+
+const listPayment = [
+    {label: 'Select payment method', value: ''},
+    {label: 'BCA', value: 'ID_BCA'},
+    {label: 'BNI', value: 'ID_BNI'},
+    {label: 'BRI', value: 'ID_BRI'},
+    {label: 'MANDIRI', value: 'ID_MANDIRI'},
+    {label: 'BSI', value: 'ID_BSI'},
+    {label: 'DANA', value: 'ID_DANA'},
+    {label: 'OVO', value: 'ID_OVO'},
+    {label: 'GOPAY', value: 'ID_GOPAY'},
+    {label: 'SHOPEEPAY', value: 'ID_SHOPEEPAY'},
 ]
 
 switch(type) {
@@ -139,6 +161,30 @@ switch(type) {
             <form onSubmit={formikWithdraw.handleSubmit}>
                 <div className='mb-5'>
                     <InputField 
+                        label='Bank/E-wallet'
+                        name='bank_code'
+                        typeInput='select-input'
+                        options={listPayment}
+                        onError={formikWithdraw.errors.bank_code}
+                        onTouched={!!formikWithdraw.touched.bank_code}
+                        onChange={formikWithdraw.handleChange} 
+                        onBlur={formikWithdraw.handleBlur} 
+                    />
+                </div>
+                <div className='mb-5'>
+                    <InputField 
+                        label='Nomer rek/No. Telephone'
+                        name='account_number'
+                        type='number'
+                        onError={formikWithdraw.errors.account_number}
+                        onTouched={!!formikWithdraw.touched.account_number}
+                        onChange={formikWithdraw.handleChange} 
+                        onBlur={formikWithdraw.handleBlur} 
+                        placeholder="xx1728712xx273" 
+                    />
+                </div>
+                <div className='mb-5'>
+                    <InputField 
                         label='Nominal pencairan'
                         name='amount'
                         type='number'
@@ -158,6 +204,14 @@ switch(type) {
     case "signup" :
         return (
             <form onSubmit={formikSignup.handleSubmit} className='w-full'>
+                {
+                    error !== "" ? (
+                        <>
+                        <ErrorMessage error={error} />
+                        </>
+                    ):
+                        null
+                }
                 <div className='w-full md:flex items-center mb-2'>
                     <div className='mb-5 w-full md:pr-8 h-[90px]'>
                         <InputField 
@@ -223,7 +277,6 @@ switch(type) {
                             placeholder='1928**1627162**2'
                         />
                     </div>
-                    
                     <div className='mb-5 w-full md:pr-8 h-[90px]'>
                         <InputField 
                             label='Nomer whatsapp'
@@ -265,6 +318,20 @@ switch(type) {
                         />
                     </div>
                 </div>
+                <div className='w-full mb-[40px]'>
+                    <div className='mb-5 w-1/2 md:pr-8 h-[90px]'>
+                        <InputField 
+                            label='Nomer rekening'
+                            name='accountNumber'
+                            onError={formikSignup.errors.accountNumber}
+                            onTouched={!!formikSignup.touched.accountNumber}
+                            onBlur={formikSignup.handleBlur} 
+                            onChange={formikSignup.handleChange}
+                            value={formikSignup.values.accountNumber}
+                            placeholder='1212xx23xx233'
+                        />
+                    </div>
+                </div>
                 <div className='md:flex items-center'>
                     <Button status='primary' typeButton='submit' text='Daftar sekarang' />
                     <p className='mt-4 md:mt-0 md:ml-4'>Sudah punya akun ? <span onClick={onClick} className='text-blue-500 cursor-pointer hover:brightness-[90%]'>Masuk</span></p>
@@ -274,6 +341,14 @@ switch(type) {
     case "signin" :
         return (
             <form onSubmit={formikSignin.handleSubmit} className='w-full md:w-1/2'>
+                 {
+                    error !== "" ? (
+                        <>
+                        <ErrorMessage error={error} />
+                        </>
+                    ):
+                        null
+                }
                 <div className='mb-5'>
                     <InputField 
                         label='NIM'
@@ -309,6 +384,14 @@ switch(type) {
     case "forgotPassword" :
         return (
             <form onSubmit={formikForgot.handleSubmit} className='w-full'>
+                {
+                    error !== "" ? (
+                        <>
+                        <ErrorMessage error={error} />
+                        </>
+                    ):
+                        null
+                }
                 <div className='mb-5'>
                     <InputField 
                         label='Email'
@@ -329,6 +412,14 @@ switch(type) {
     case "ResetPassword" :
         return (
             <form onSubmit={formikResetPassword.handleSubmit} className='w-full'>
+                {
+                    error !== "" ? (
+                        <>
+                        <ErrorMessage error={error} />
+                        </>
+                    ):
+                        null
+                }
                 <div className='mb-5'>
                     <InputField 
                         label='Perbarui password'

@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from 'redux-persist'
 import thunk from "redux-thunk";
 import Reducers from './combineReducers'
@@ -16,5 +16,5 @@ export const store = configureStore({
     middleware: [thunk],
 })
 
-export const peristor = persistStore(store)
+export const persistor = persistStore(store)
 export default store

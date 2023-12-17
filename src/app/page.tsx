@@ -1,15 +1,20 @@
 "use client"
-import { Building, Canteen, KHS, Line, Man3, PKKMB, Purple2, Sertification, Square, Test, Transfer, UP } from '@/assets/images'
+import { Building, Canteen, Line, PKKMB, Purple2, Sertification, Test, Transfer, UP } from '@/public/images'
 import Alert from '@/components/alert'
 import FormGroup from '@/components/formGroup'
 import InputField from '@/components/inputField'
 import Sidebar from '@/components/sidebar'
+import ProviderMain from '@/redux/provider'
+import store from '@/redux/store'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
-import { useState } from 'react'
-import { FaUserAlt } from 'react-icons/fa'
+import { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import './globals.css'
+import API from '@/services/api'
+import { isEqual } from '@/helpers'
+import { authSignIn } from '@/redux/authSlice'
 
 const DynamicTable = dynamic(() => import('../components/table'), {
   ssr: false,
@@ -20,6 +25,21 @@ const Home = () => {
   const [typePayment, setTypePayment] = useState('tf-administration')
   const [statusModal, setStatusModal] = useState(false)
   const [show, setShow] = useState(false)
+  const [dataUser, setDataUser] = useState<Record<string, any>>({})
+
+  const auth = useSelector((state: any) => state.authSlice.auth)
+  const dispatch = useDispatch()
+  console.log('auth', auth)
+
+  useEffect(() => {
+    (async () => {
+      const response = await API.getAccountById(auth?.user_id)
+      if(!isEqual(dataUser, response.data.data)) {
+        dispatch(authSignIn(response.data.data))
+        setDataUser(response.data.data)
+      }
+    })()
+  }, [dataUser, dispatch])
 
   const handleFormAdmin = (type: string, typeForm: string ) => {
       localStorage.setItem('typePayment', type)
@@ -104,25 +124,26 @@ const Home = () => {
       <div className='relative md:ml-[26%] w-full md:w-[74%] bg-blue-100 h-max border-box pb-6 px-4 md:px-6 pt-7 md:pt-5'>
 
         {/* Intro */}
-        <div className='w-full md:w-[80%] md:ml-[30px] flex item-center mb-[40px] md:mb-6 z-[999999]'>
+        <div className='w-full md:w-[80%] md:ml-[30px] flex items-center mb-[40px] md:mb-6 z-[999999]'>
           <div>
-            <Link href={'/profile/232323'}>
+            <Link href={'/profile'}>
               <div className='w-[50px] h-[50px] overflow-hidden rounded-full bg-slate-400 mr-4 active:scale-[0.98]'>
                 <Image 
-                  src={Man3}
+                  src={`/images/${dataUser ? dataUser.typePhoto : ''}.svg`}
                   alt='fotoFace'
+                  width={100}
+                  height={100}
                   />
               </div>
             </Link>
           </div>
           <div>
-            <h3 className='md:flex hidden'>Weclome, back!</h3>
             <div className='md:flex items-center'>
-              <p className='overflow-hidden max-w-[94%] whitespace-nowrap overflow-ellipsis'>
-                Muhammad Khoirulhuda 
+              <p className='overflow-hidden md:flex hidden max-w-[94%] whitespace-nowrap overflow-ellipsis'>
+                {dataUser?.fullName} 
               </p>
-              <p className='font-normal md:ml-3'>
-                (41215546)
+              <p className='font-normal bg-blue-300 rounded-full px-4 py-1 text-center text-white md:ml-2'>
+                {dataUser.NIM}
               </p>
             </div>
           </div>
@@ -139,11 +160,11 @@ const Home = () => {
                 className='absolute left-0 top-0 md:mt-[-20px]'
               />
               <div className='z-[222] absolute text-white text-[24px] md:bottom-[135px] left-[50px] flex items-center justify-between'>
-                <p>8126 2832 2623 2637</p>
+                <p>{dataUser?.accountNumber ? dataUser.accountNumber.replace(/(\d{4})/g, '$1 ') : 0}</p>
               </div>
               <div className='z-[222] absolute text-white md:bottom-[55px] left-[50px]'>
                 <p>Account name</p>
-                <small>Jhon DOe</small>
+                <small>{dataUser?.fullName}</small>
               </div>
             </div>
 
@@ -267,4 +288,8 @@ const Home = () => {
   )
 }
 
-export default Home
+export default () => (
+  <ProviderMain store={store}>
+    <Home />
+  </ProviderMain>
+);

@@ -1,9 +1,18 @@
+'use client'
+
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import { authInterface } from '../interfaces/authInterface'
 import API from '@/services/api';
+import { useDispatch } from 'react-redux'
+import { authSignIn, saveToken } from '@/redux/authSlice';
+import { useRouter } from 'next/navigation'
 
-export const signinUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
+export const signinUseFormik = ({ onError }: {onError: any}) => {
+
+    const dispatch = useDispatch()
+    const navigate = useRouter()
+
     const formik = useFormik<authInterface>({
         initialValues: {
             NIM: '',
@@ -22,8 +31,10 @@ export const signinUseFormik = ({ onError, onResponse }: {onError: any, onRespon
             console.log('response signup:', response) 
             
             if(response.data.message === 'Successfully signin!') {
-                onResponse(response.data.message)
+                dispatch(authSignIn(response.data.data))
+                dispatch(saveToken(response.data.token))
                 resetForm()
+                navigate.push('/', {scroll: false})
             }else {
                 onError(response.data.message)
             }

@@ -2,7 +2,8 @@ import axios from "axios";
 import store from "../redux/store";
 
 const api = axios.create({
-  baseURL: 'https://be-unipay.vercel.app',
+  // baseURL: 'https://be-unipay.vercel.app',
+  baseURL: 'http://localhost:3600',
   headers: {
     "Content-Type": "application/json",
   }    
@@ -16,6 +17,7 @@ api.interceptors.request.use(async function (config) {
 
   if (token) {
     config.headers["Authorization"] = token;
+    console.log('token', token)
   }
 
   // Periksa apakah permintaan mengandung file
@@ -42,7 +44,7 @@ api.interceptors.response.use(function (response) {
   console.log('error interceptors:', error)
   if (error.response && error.response.status === 403) {
       console.log("error interceptors new:", error)
-      window.location.pathname = '/auth/signin'
+      window.location.pathname = '/auth'
   }
 
   return Promise.reject(error);

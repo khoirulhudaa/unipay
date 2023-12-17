@@ -4,6 +4,7 @@ import { authInterface } from '../interfaces/authInterface'
 import API from '@/services/api';
 
 export const signupUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
+
     const formik = useFormik<authInterface>({
         initialValues: {
             email: '',
@@ -14,6 +15,7 @@ export const signupUseFormik = ({ onError, onResponse }: {onError: any, onRespon
             gender: '',
             number_telephone: '',
             prodi: '',
+            accountNumber: ''
         },
         validationSchema: Yup.object({
             email: Yup.string()
@@ -39,12 +41,16 @@ export const signupUseFormik = ({ onError, onResponse }: {onError: any, onRespon
             .required('This field is required.'),
             prodi: Yup.string()
             .required('This field is required.'),
+            accountNumber: Yup.string()
+            .min(10, 'Minimal must 10 characters.')
+            .max(13, 'Maximum only 13 characters.')
+            .required('This field is required.'),
         }),
         onSubmit: async (values: any, { resetForm }) => {
             const response = await API.signUp(values)
             console.log('response signup:', response) 
             
-            if(response.data.message === 'Successfully signup!') {
+            if(response.data.status === 200) {
                 onResponse(response.data.message)
                 resetForm()
             }else {

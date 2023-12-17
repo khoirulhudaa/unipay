@@ -1,11 +1,40 @@
-import Sidebar from "@/components/sidebar"
+'use client'
+
 import '@/app/globals.css'
+import SweetAlert from '@/components/alert/sweetAlert'
 import FormGroup from "@/components/formGroup"
-import { useState } from "react"
+import Sidebar from "@/components/sidebar"
+import { authSignOut } from "@/redux/authSlice"
+import store from '@/redux/store'
+import { useEffect, useState } from "react"
+import { Provider, useDispatch } from "react-redux"
 
-const Signup = () => {
+const Auth = () => {
 
-  const [statusAuth, setStatusAuth] = useState(false)
+  const dispatch = useDispatch()
+
+  const [statusAuth, setStatusAuth] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  
+  useEffect(() => {
+    dispatch(authSignOut())
+  }, [])
+
+  const handleResponse = (response: string) => {
+    if(response === "Successfully signup!") {
+      setErrorMessage("")
+      SweetAlert({
+        text:'Berhasil daftar',
+        title: 'Success',
+        icon: 'success',
+        onClick: () => setStatusAuth(false)
+      })
+    }
+  }
+
+  const handleErrorMessage = (error: string) => {
+    setErrorMessage(error)
+  }
 
   return (
     <div className="flex h-screen w-screen bg-blue-100">
@@ -15,7 +44,7 @@ const Signup = () => {
     
         <div className="relative md:ml-[26%] w-full md:w-[74%] bg-blue-100 h-max border-box pb-6 px-2 md:px-6 pt-5">
             <div className="rounded-lg p-4 w-full">
-               <FormGroup type={!statusAuth ? "signin" : "signup"} onClick={() => setStatusAuth(!statusAuth)} />
+              <FormGroup type={!statusAuth ? "signin" : "signup"} handleResponse={(e) => handleResponse(e)} handleErrorMessage={(e) => handleErrorMessage(e)} onClick={() => setStatusAuth(!statusAuth)} error={errorMessage} />
             </div>
         </div>
 
@@ -23,4 +52,8 @@ const Signup = () => {
   )
 }
 
-export default Signup
+export default () => (
+  <Provider store={store}>
+    <Auth />
+  </Provider>
+);

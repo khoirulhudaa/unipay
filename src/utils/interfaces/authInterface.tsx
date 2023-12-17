@@ -6,5 +6,7 @@ export interface authInterface {
     NIK?: string,
     fullName?: string,
     gender?: string,
-    prodi?: string
+    prodi?: string,
+    type_photo?: string,
+    accountNumber?: string
 }

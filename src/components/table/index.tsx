@@ -1,4 +1,4 @@
-import { KHS } from '@/assets/images'
+import { KHS } from '@/public/images'
 import Image from 'next/image'
 import { FaArrowDown } from 'react-icons/fa'
 

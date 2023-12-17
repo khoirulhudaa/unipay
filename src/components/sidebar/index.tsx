@@ -1,11 +1,11 @@
-import { Card, Woman2 } from '@/assets/images'
+import { Card, Woman2 } from '@/public/images'
 import Button from '@/components/button'
 import Image from 'next/image'
 import { FaArrowLeft, FaSignOutAlt, FaWallet } from 'react-icons/fa'
 import '../../app/globals.css'
 import Link from 'next/link'
 
-const Sidebar = ({ type, show }: { type?: string, show?: boolean }) => {
+const Sidebar = ({ type, show, router }: { type?: string, show?: boolean, router?: string }) => {
   switch(type) {
     case "auth": 
       return (
@@ -40,7 +40,7 @@ const Sidebar = ({ type, show }: { type?: string, show?: boolean }) => {
             <div className='flex items-center w-max rounded-full text-[20px] top-8 bg-white text-blue-500 px-5 py-1 text-center'>
               <p>Rp. 150.000</p>  
             </div>
-            <Link href={'/'} className='z-40'>
+            <Link href={router ? router : '/'} className='z-40'>
               <div className='w-[50px] h-[50px] z-[111] p-2 rounded-full overflow-hidden bg-blue-400 flex items-center justify-center cursor-pointer hover:brightnes-[90%] active:scale-[0.96] text-white'>
                 <FaArrowLeft />
               </div>

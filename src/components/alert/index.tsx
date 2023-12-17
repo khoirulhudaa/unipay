@@ -1,4 +1,4 @@
-import { IKMI } from '@/assets/images'
+import { IKMI } from '@/public/images'
 import Image from 'next/image'
 import React from 'react'
 import { FaTimes } from 'react-icons/fa'

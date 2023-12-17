@@ -1,4 +1,4 @@
-import { Success } from '@/assets/images'
+import { Success } from '@/public/images'
 import Button from '@/components/button'
 import Sidebar from '@/components/sidebar'
 import Image from 'next/image'
