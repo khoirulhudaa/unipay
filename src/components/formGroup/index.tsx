@@ -163,7 +163,7 @@ switch(type) {
                         onBlur={formikAdmin.handleBlur} 
                         disabled={true}
                         onChange={formikAdmin.handleChange}
-                        value={typeof window !== 'undefined' ? localStorage.getItem('typePayment') ?? '' : ''}
+                        value={localStorage.getItem('typePayment') ?? 'Administrasi'}
                     />
                 </div>
                 <div className='mb-5'>

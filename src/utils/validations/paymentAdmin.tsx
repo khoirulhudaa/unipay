@@ -11,7 +11,6 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
     const formik = useFormik<paymentInterface>({
         initialValues: {
             amount: 0,
-            typePayment: '',
             note: ''
         },
         validationSchema: Yup.object({
@@ -24,12 +23,13 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
                 amount: values.amount,
                 email: auth ? auth.fullName : '',
                 description: `Pembayaran ${values.typePayment}`,
-                typePayment: values.typePayment,
+                typePayment: localStorage.getItem('typePayment') ?? '',
                 fullName: auth ? auth.fullName : '',
                 number_telephone: auth ? auth.number_telephone : '',
                 user_id: auth ? auth.user_id : '',
                 year: auth ? auth.year : '',
-                note: values.note
+                note: values.note,
+                classRoom: values.classRoom
             }
 
             const response = await API.transfer(data)
