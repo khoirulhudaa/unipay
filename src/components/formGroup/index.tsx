@@ -1,5 +1,5 @@
 import { paymentAdminUseFormik } from '@/utils/validations/paymentAdmin'
-import { paymentUseFormik } from '@/utils/validations/topUpValidation'
+import { paymentUseFormik } from '@/utils/validations/transfer'
 import { paymentWithdrawUseFormik } from '@/utils/validations/withdrawValidation'
 import Button from '../button'
 import InputField from '../inputField'
@@ -11,6 +11,7 @@ import { resetPasswordUseFormik } from '@/utils/validations/resetPassword'
 import { updateProfileUseFormik } from '@/utils/validations/updateProfile'
 import ErrorMessage from '../errorMessage'
 import { useEffect } from 'react'
+import { paymentTopUpUseFormik } from '@/utils/validations/topUpValidation'
 
 interface formGroupProps {
     type?: string,
@@ -35,6 +36,12 @@ const FormGroup = ({
 
 // Transfer original 
 const formik = paymentUseFormik({ 
+    onError: handleErrorMessage, 
+    onResponse: handleResponse 
+})
+
+// Transfer-up 
+const formikTopUp = paymentTopUpUseFormik({ 
     onError: handleErrorMessage, 
     onResponse: handleResponse 
 })
@@ -112,6 +119,27 @@ const listPayment = [
 ]
 
 switch(type) {
+    case "top-up":
+        return (
+            <form onSubmit={formikTopUp.handleSubmit} className='z-[999999]'>
+                <div className='mb-5'>
+                    <InputField 
+                        label='Nominal'
+                        name='amount'
+                        type='number'
+                        onError={formikTopUp.errors.amount}
+                        onTouched={!!formikTopUp.touched.amount}
+                        onChange={formikTopUp.handleChange} 
+                        onBlur={formikTopUp.handleBlur} 
+                        placeholder="100.000" 
+                    />
+                </div>
+                <div className='flex items-center'>
+                    <Button text='Kirim sekarang' typeButton='submit' status='primary' style='mr-4' />
+                    <Button text='Batalkan' status='delete' handleClick={onClick} />
+                </div>
+            </form>
+        )
     case "tf-administration":
         return (
             <form onSubmit={formikAdmin.handleSubmit} className='z-[999999]'>
@@ -319,7 +347,7 @@ switch(type) {
                     </div>
                 </div>
                 <div className='w-full mb-[40px]'>
-                    <div className='mb-5 w-1/2 md:pr-8 h-[90px]'>
+                    <div className='mb-5 w-full md:w-1/2 md:pr-8 h-[90px]'>
                         <InputField 
                             label='Nomer rekening'
                             name='accountNumber'
@@ -499,22 +527,24 @@ switch(type) {
             <form>
                 <div className='mb-5'>
                 <InputField 
-                    label='ID unipay'
-                    name='unipay_id'
+                    label='NIM penerima'
+                    name='NIM'
                     onError={formik.errors.amount}
                     onTouched={!!formik.touched.amount}
-                    onChange={formik.handleChange} 
+                    onChange={formik.handleChange}
+                    value={formik.values.NIM} 
                     onBlur={formik.handleBlur} 
-                    placeholder="X776XX" 
+                    placeholder="41xx7627" 
                 />
                 </div>
-                <div className='mb-5'>
+                 <div className='mb-5'>
                 <InputField 
                     label='Nominal pencairan'
                     name='amount'
                     onError={formik.errors.amount}
                     onTouched={!!formik.touched.amount}
-                    onChange={formik.handleChange} 
+                    onChange={formik.handleChange}
+                    value={formik.values.amount}
                     onBlur={formik.handleBlur} 
                     placeholder="1.000" 
                 />

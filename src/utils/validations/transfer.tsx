@@ -4,36 +4,43 @@ import { paymentInterface } from '../interfaces/paymentInterface'
 import store from '@/redux/store'
 import API from '@/services/api'
 
-export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
+export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
 
     const auth = store.getState().authSlice.auth
+
     const formik = useFormik<paymentInterface>({
         initialValues: {
-            amount: 0
+            amount: 0,
+            typePayment: '',
+            NIM: ''
         },
         validationSchema: Yup.object({
             amount: Yup.number()
             .min(9999, 'Minimal Rp. 1.000 (one Thousand)')
             .required('Tidak boleh kosong!'),
+            NIM: Yup.string()
+            .min(6, 'Minimal 6 numbers')
+            .max(6, 'Maksimal 6 numbers')
+            .required('Tidak boleh kosong!'),
         }),
         onSubmit: async (values: any, { resetForm }) => {
+
             const data = {
                 amount: values.amount,
+                email: auth ? auth.email : '',
+                description: 'TRANSFER',
+                typePayment: localStorage.getItem('typePayment') ?? '',
                 fullName: auth ? auth.fullName : '',
                 number_telephone: auth ? auth.number_telephone : '',
-                email: auth ? auth.email : '',
-                description: 'TOP-UP',
-                typePayment: 'top-up',
-                NIM: auth ? auth.NIM : '',
-                to: 'Admin Kampus'
+                from: auth ? auth.NIM : '',
+                to: values.NIM
             }
 
             const response = await API.transfer(data)
-            console.log('response top-up:', response) 
+            console.log('response transfer:', response) 
             
-            if(response.data.message === "Your payment is still pending!") {
+            if(response.data.message === 'Your payment is still pending!') {
                 onResponse(response.data.message)
-                console.log('3b')
                 resetForm()
                 const invoiceUrl = response.data.data.invoiceUrl;
                 window.location.href = invoiceUrl;

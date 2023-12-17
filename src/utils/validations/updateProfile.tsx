@@ -23,17 +23,17 @@ export const updateProfileUseFormik = ({ onError, onResponse }: {onError: any, o
         validationSchema: Yup.object({
             email: Yup.string()
             .email('Invalid email address')
-            .required('This field is required.'),
+            .required('Tidak boleh kosong!'),
             fullName: Yup.string()
             .min(3, 'Minimal must 3 characters.')
             .max(20, 'Maximum only 20 characters.')
-            .required('This field is required.'),
+            .required('Tidak boleh kosong!'),
             number_telephone: Yup.string()
             .min(10, 'Minimal must 10 characters.')
             .max(13, 'Maximum only 13 characters.')
-            .required('This field is required.'),
+            .required('Tidak boleh kosong!'),
             gender: Yup.string()
-            .required('This field is required.'),
+            .required('Tidak boleh kosong!'),
         }),
         onSubmit: async (values: any, { resetForm }) => {
 

@@ -1,11 +1,18 @@
 import { Card, Woman2 } from '@/public/images'
 import Button from '@/components/button'
 import Image from 'next/image'
-import { FaArrowLeft, FaSignOutAlt, FaWallet } from 'react-icons/fa'
+import { FaArrowLeft, FaPlusCircle, FaSignOutAlt, FaWallet } from 'react-icons/fa'
 import '../../app/globals.css'
 import Link from 'next/link'
 
-const Sidebar = ({ type, show, router }: { type?: string, show?: boolean, router?: string }) => {
+const Sidebar = ({ 
+  type, show, router, onClick }: 
+  { 
+    type?: string, 
+    show?: boolean, 
+    router?: string, 
+    onClick: any 
+  }) => {
   switch(type) {
     case "auth": 
       return (
@@ -83,7 +90,12 @@ const Sidebar = ({ type, show, router }: { type?: string, show?: boolean, router
             alt='Card-image'
             className='w-full absolute left-[50%] transform -translate-x-1/2 -translate-y-1/2 top-[50%] z-[2] scale-[1.8] h-auto'
           />
-          <Button text='Withdraw' status='primary' style='w-[75%] absolute bottom-10 z-40' />
+          <div className='bottom-10 z-40 absolute flex items-center justify-between w-full px-5'>
+            <div className='rounded-full cursor-pointer hover:bg-blue-600 active:scale-[0.97] bg-blue-500 text-white tect-center flex items-center justify-center w-[50px] h-[50px] mr-2' onClick={onClick}>
+              <FaPlusCircle />
+            </div>
+            <Button text='Withdraw' status='primary' style='w-[75%]' />
+          </div>
         </div>
       )
   }

@@ -8,9 +8,8 @@ import toRupiah from '../../helpers/toRupiah';
 export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, onResponse?: any}) => {
 
     const auth = store.getState().authSlice.auth
-    const balance = store.getState().paymentSlice.balance
 
-    console.log('data balance:', balance)
+    console.log('data balance:', auth?.balance)
 
     const formik = useFormik<paymentInterface>({
         initialValues: {
@@ -41,8 +40,8 @@ export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, 
 
                 console.log('values:', data)
 
-                if (values.amount > balance) {
-                    formik.setErrors({ amount: `Withdraw maximal ${toRupiah(balance)}` });
+                if (values.amount > auth?.balance) {
+                    formik.setErrors({ amount: `Withdraw maximal ${toRupiah(auth?.balance)}` });
                     return; 
                 }
 

@@ -3,5 +3,6 @@ export interface paymentInterface {
     typePayment?: string,
     description?: string,
     bank_code?: string,
-    account_number?: number
+    account_number?: number,
+    NIM?: string
 }

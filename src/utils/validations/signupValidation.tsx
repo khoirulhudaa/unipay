@@ -43,7 +43,7 @@ export const signupUseFormik = ({ onError, onResponse }: {onError: any, onRespon
             .required('This field is required.'),
             accountNumber: Yup.string()
             .min(10, 'Minimal must 10 characters.')
-            .max(13, 'Maximum only 13 characters.')
+            .max(15, 'Maximum only 15 characters.')
             .required('This field is required.'),
         }),
         onSubmit: async (values: any, { resetForm }) => {

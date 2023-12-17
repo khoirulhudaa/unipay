@@ -1,20 +1,21 @@
 "use client"
-import { Building, Canteen, Line, PKKMB, Purple2, Sertification, Test, Transfer, UP } from '@/public/images'
 import Alert from '@/components/alert'
 import FormGroup from '@/components/formGroup'
 import InputField from '@/components/inputField'
 import Sidebar from '@/components/sidebar'
+import { isEqual } from '@/helpers'
+import { Building, Canteen, Line, PKKMB, Purple2, Sertification, Test, Transfer, UP } from '@/public/images'
+import { authSignIn } from '@/redux/authSlice'
 import ProviderMain from '@/redux/provider'
 import store from '@/redux/store'
+import API from '@/services/api'
 import dynamic from 'next/dynamic'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './globals.css'
-import API from '@/services/api'
-import { isEqual } from '@/helpers'
-import { authSignIn } from '@/redux/authSlice'
+import SweetAlert from '@/components/alert/sweetAlert'
 
 const DynamicTable = dynamic(() => import('../components/table'), {
   ssr: false,
@@ -22,9 +23,10 @@ const DynamicTable = dynamic(() => import('../components/table'), {
 
 const Home = () => {
 
-  const [typePayment, setTypePayment] = useState('tf-administration')
-  const [statusModal, setStatusModal] = useState(false)
-  const [show, setShow] = useState(false)
+  const [typePayment, setTypePayment] = useState<string>('tf-administration')
+  const [statusModal, setStatusModal] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>("")
+  const [show, setShow] = useState<boolean>(false)
   const [dataUser, setDataUser] = useState<Record<string, any>>({})
 
   const auth = useSelector((state: any) => state.authSlice.auth)
@@ -51,6 +53,23 @@ const Home = () => {
     setStatusModal(false)
   }
 
+  const handleResponse = (response: string) => {
+    if(response === "Password successfully reset!") {
+      setErrorMessage("")
+      SweetAlert({
+        text:`Pembayaran ${typePayment} berhasil!`,
+        title: 'Success',
+        icon: 'success',
+        showCancelButton: false,
+        confirmButtonText: 'Masuk kembali',
+      })
+    }
+  }
+
+  const handleErrorMessage = (error: string) => {
+    setErrorMessage(error)
+  }
+
   return (
     <div className='relative w-screen h-screen flex'>
 
@@ -58,7 +77,7 @@ const Home = () => {
       <Alert />
       
       {/* Sidebar */}
-      <Sidebar show={show} />
+      <Sidebar show={show} onClick={() => handleFormAdmin('top-up', 'top-up')} />
 
       <div className='absolute z-[99999] right-4 top-6 rounded-lg border border-blue-500 w-[50px] h-[50px] flex md:hidden flex-col justify-center items-center cursor-pointer hover:brightness-[90%] active:scale-[0.98]' onClick={() => setShow(!show)}>
         <div className='w-full h-max flex flex-col justify-between items-center justify-between cursor-pointer hover:brightness-[90%] active:scale-[0.98]'>
@@ -70,7 +89,7 @@ const Home = () => {
 
       {/* Form sidebar */}
       <div className={`w-full md:w-[74vw] overflow-hidden fixed items-center right-0 flex top-0 h-screen duration-100 ease ${statusModal ? 'z-[999999] bg-blue-500' : 'z-[-1] bg-blue-100'}`}>
-        <div className={`w-[60%] md:block hidden relative ${statusModal ? 'top-[0%]' : 'top-[100%]'} duration-300 ease-in h-screen bg-blue-500 bg-opacity-[0.5] p-6`}>
+        <div className={`w-[60%] md:block hidden relative ${statusModal ? 'top-[0%]' : 'top-[100%]'} duration-300 ease-in h-screen bg-blue-300 bg-opacity-[0.5] p-6`}>
           <div className='mb-5 text-white'>
             <InputField 
               label='Username'
@@ -108,15 +127,8 @@ const Home = () => {
           </div>
         </div>
         <div className={`relative w-full md:w-[40%] ${statusModal ? 'bottom-[0%]' : 'bottom-[100%]'} duration-300 ease-in h-screen bg-blue-100 p-6`}>
-
           {/* form */}
-          <FormGroup type={typePayment} typePayment='KHS' onClick={handleCloseModal} />
-
-          <Image 
-            src={Line}
-            alt='lines'
-            className='absolute md:flex hidden bottom-[-150px] w-[80%] right-[-150px]'
-          />
+          <FormGroup type={typePayment} typePayment={typePayment ?? ''} onClick={handleCloseModal} handleResponse={(e) => handleResponse(e)} handleErrorMessage={(e) => handleErrorMessage(e)} />
         </div>
       </div>
 

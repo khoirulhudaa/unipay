@@ -15,7 +15,7 @@ const initialState: authStates = {
         NIK: "",
         NIM: "",
         prodi: "",
-        typePhoto: ""
+        type_photo: ""
     },
     token: ""
 }
