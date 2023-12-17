@@ -93,7 +93,7 @@ const Sidebar = ({
         <div className={`fixed flex ${show ? 'z-[99999999] left-[0%] shadow-lg' : 'left-[-100%] md:left-[0%] z-[9999999] '} md:flex bottom-0 w-[80vw] md:w-[26%] bg-blue-200 flex item-center duration-200 justify-center h-screen overflow-hidden`}>
           <div className='absolute flex items-center justify-between w-full px-5 top-5'>
             <div className='flex items-center w-max rounded-full text-[20px] top-8 bg-white text-blue-500 px-5 py-1 text-center'>
-              <p>Rp. 150.000</p>  
+              <p>{toRupiah(dataUser?.balance)}</p>  
             </div>
             <Link href={'/auth'} className='z-40'>
               <div className='w-[50px] h-[50px] z-[111] p-2 rounded-full overflow-hidden bg-red-400 flex items-center justify-center cursor-pointer hover:brightnes-[90%] active:scale-[0.96] text-white'>
