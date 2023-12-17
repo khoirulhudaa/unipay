@@ -11,7 +11,7 @@ const Sidebar = ({
     type?: string, 
     show?: boolean, 
     router?: string, 
-    onClick: any 
+    onClick?: any 
   }) => {
   switch(type) {
     case "auth": 
