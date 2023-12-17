@@ -12,14 +12,14 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onRespo
         initialValues: {
             amount: 0,
             typePayment: '',
-            NIM: '',
+            to: '',
             classRoom: ''
         },
         validationSchema: Yup.object({
             amount: Yup.number()
             .min(9999, 'Minimal Rp. 1.000 (one Thousand)')
             .required('Tidak boleh kosong!'),
-            NIM: Yup.string()
+            to: Yup.string()
             .min(6, 'Minimal 6 numbers')
             .max(6, 'Maksimal 6 numbers')
             .required('Tidak boleh kosong!'),
@@ -31,13 +31,15 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onRespo
             const data = {
                 amount: values.amount,
                 email: auth ? auth.email : '',
-                description: `TRANSFER_${values.NIM}`,
+                description: `TRANSFER_${values.to}`,
                 typePayment: localStorage.getItem('typePayment') ?? '',
                 fullName: auth ? auth.fullName : '',
                 number_telephone: auth ? auth.number_telephone : '',
                 from: auth ? auth.NIM : '',
-                to: values.NIM,
-                year: auth ? auth.year : ''
+                to: values.to,
+                year: auth ? auth.year : '',
+                NIM: auth ? auth.NIM : '',
+                classRoom: values.classRoom
             }
 
             const response = await API.transfer(data)

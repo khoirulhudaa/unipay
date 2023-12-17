@@ -37,6 +37,9 @@ const API = {
     disbursement: (body: any) => {
         return api.post('/payment/withdraw', body)
     },
+    getAllHistoryPayments: (body?: {}) => {
+        return api.get('/payment/history', body)
+    },
 
     // payment methods
     getAllPaymentMethods: () => {

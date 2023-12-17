@@ -44,9 +44,9 @@ const Home = () => {
   }, [dataUser, dispatch])
 
   const handleFormAdmin = (type: string, typeForm: string ) => {
-      localStorage.setItem('typePayment', type)
-      setStatusModal(true)
-      setTypePayment(typeForm)
+    localStorage.setItem('typePayment', type)
+    setStatusModal(true)
+    setTypePayment(typeForm)
   }
 
   const handleCloseModal = () => {

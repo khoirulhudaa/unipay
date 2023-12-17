@@ -180,13 +180,13 @@ switch(type) {
                 </div>
                 <div className='mb-5'>
                     <InputField 
-                        label='description'
-                        name='description'
-                        onError={formikAdmin.errors.description}
-                        onTouched={!!formikAdmin.touched.description}
+                        label='Catatan'
+                        name='note'
+                        onError={formikAdmin.errors.note}
+                        onTouched={!!formikAdmin.touched.note}
                         onChange={formikAdmin.handleChange} 
                         onBlur={formikAdmin.handleBlur} 
-                        placeholder="Berikan deskripsi (jika perlu)..." 
+                        placeholder="Berikan catatan (jika perlu)..." 
                     />
                 </div>
                 <div className='mb-5'>
@@ -403,7 +403,7 @@ switch(type) {
                             value={formikSignup.values.accountNumber}
                             placeholder='1212xx23xx233'
                         />
-                    </div>
+               Transfer     </div>
                 </div>
                 <div className='md:flex items-center'>
                     <Button status='primary' typeButton='submit' text='Daftar sekarang' />
@@ -569,22 +569,22 @@ switch(type) {
         )
     default :
         return (
-            <form>
+            <form onSubmit={formik.handleSubmit}>
                 <div className='mb-5'>
                 <InputField 
                     label='NIM penerima'
-                    name='NIM'
-                    onError={formik.errors.amount}
-                    onTouched={!!formik.touched.amount}
+                    name='to'
+                    onError={formik.errors.to}
+                    onTouched={!!formik.touched.to}
                     onChange={formik.handleChange}
-                    value={formik.values.NIM} 
+                    value={formik.values.to} 
                     onBlur={formik.handleBlur} 
                     placeholder="41xx7627" 
                 />
                 </div>
                  <div className='mb-5'>
                 <InputField 
-                    label='Nominal pencairan'
+                    label='Nominal dikirim'
                     name='amount'
                     onError={formik.errors.amount}
                     onTouched={!!formik.touched.amount}
@@ -598,10 +598,10 @@ switch(type) {
                     <InputField 
                         label='Kelas (Anda)'
                         name='classRoom'
-                        onError={formikAdmin.errors.classRoom}
-                        onTouched={!!formikAdmin.touched.classRoom}
-                        onChange={formikAdmin.handleChange} 
-                        onBlur={formikAdmin.handleBlur} 
+                        onError={formik.errors.classRoom}
+                        onTouched={!!formik.touched.classRoom}
+                        onChange={formik.handleChange} 
+                        onBlur={formik.handleBlur} 
                         placeholder="XX-20XX-PX" 
                     />
                 </div>
