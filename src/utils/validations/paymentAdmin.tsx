@@ -22,11 +22,12 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
             const data = {
                 amount: values.amount,
                 email: auth ? auth.fullName : '',
-                description: 'Transfer',
+                description: `Pembayaran ${values.typePayment}`,
                 typePayment: values.typePayment,
                 fullName: auth ? auth.fullName : '',
                 number_telephone: auth ? auth.number_telephone : '',
-                user_id: auth ? auth.user_id : ''
+                user_id: auth ? auth.user_id : '',
+                year: auth ? auth.year : ''
             }
 
             const response = await API.transfer(data)

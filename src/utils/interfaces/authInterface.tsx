@@ -8,5 +8,6 @@ export interface authInterface {
     gender?: string,
     prodi?: string,
     type_photo?: string,
-    accountNumber?: string
+    accountNumber?: string,
+    year?: string
 }

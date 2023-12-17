@@ -15,7 +15,8 @@ export const signupUseFormik = ({ onError, onResponse }: {onError: any, onRespon
             gender: '',
             number_telephone: '',
             prodi: '',
-            accountNumber: ''
+            accountNumber: '',
+            year: ''
         },
         validationSchema: Yup.object({
             email: Yup.string()
@@ -44,6 +45,10 @@ export const signupUseFormik = ({ onError, onResponse }: {onError: any, onRespon
             accountNumber: Yup.string()
             .min(10, 'Minimal must 10 characters.')
             .max(15, 'Maximum only 15 characters.')
+            .required('This field is required.'),
+            year: Yup.string()
+            .min(4, 'Minimal must 4 characters.')
+            .max(4, 'Maximum only 4 characters.')
             .required('This field is required.'),
         }),
         onSubmit: async (values: any, { resetForm }) => {

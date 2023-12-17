@@ -349,6 +349,18 @@ switch(type) {
                 <div className='w-full mb-[40px]'>
                     <div className='mb-5 w-full md:w-1/2 md:pr-8 h-[90px]'>
                         <InputField 
+                            label='Tahun angkatan'
+                            name='year'
+                            onError={formikSignup.errors.year}
+                            onTouched={!!formikSignup.touched.year}
+                            onBlur={formikSignup.handleBlur} 
+                            onChange={formikSignup.handleChange}
+                            value={formikSignup.values.year}
+                            placeholder='Tahun daftar kuliah...'
+                        />
+                    </div>
+                    <div className='mb-5 w-full md:w-1/2 md:pr-8 h-[90px]'>
+                        <InputField 
                             label='Nomer rekening'
                             name='accountNumber'
                             onError={formikSignup.errors.accountNumber}

@@ -33,7 +33,8 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onRespo
                 fullName: auth ? auth.fullName : '',
                 number_telephone: auth ? auth.number_telephone : '',
                 from: auth ? auth.NIM : '',
-                to: values.NIM
+                to: values.NIM,
+                year: auth ? auth.year : ''
             }
 
             const response = await API.transfer(data)

@@ -25,7 +25,8 @@ export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, on
                 description: 'TOP-UP',
                 typePayment: 'top-up',
                 NIM: auth ? auth.NIM : '',
-                to: 'Admin Kampus'
+                to: 'Admin Kampus',
+                year: auth ? auth.year : ''
             }
 
             const response = await API.transfer(data)

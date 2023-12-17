@@ -4,5 +4,6 @@ export interface paymentInterface {
     description?: string,
     bank_code?: string,
     account_number?: number,
-    NIM?: string
+    NIM?: string,
+    year?: string
 }
