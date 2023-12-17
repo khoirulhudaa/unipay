@@ -1,10 +1,11 @@
 "use client"
 import Alert from '@/components/alert'
+import SweetAlert from '@/components/alert/sweetAlert'
 import FormGroup from '@/components/formGroup'
 import InputField from '@/components/inputField'
 import Sidebar from '@/components/sidebar'
 import { isEqual } from '@/helpers'
-import { Building, Canteen, Line, PKKMB, Purple2, Sertification, Test, Transfer, UP } from '@/public/images'
+import { Building, Canteen, PKKMB, Purple2, Sertification, Test, Transfer, UP } from '@/public/images'
 import { authSignIn } from '@/redux/authSlice'
 import ProviderMain from '@/redux/provider'
 import store from '@/redux/store'
@@ -15,7 +16,6 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './globals.css'
-import SweetAlert from '@/components/alert/sweetAlert'
 
 const DynamicTable = dynamic(() => import('../components/table'), {
   ssr: false,

@@ -1,14 +1,12 @@
-import { Card, Woman2 } from '@/public/images'
 import Button from '@/components/button'
-import Image from 'next/image'
-import { FaArrowLeft, FaPlusCircle, FaSignOutAlt, FaWallet } from 'react-icons/fa'
-import '../../app/globals.css'
-import Link from 'next/link'
-import { useDispatch, useSelector } from 'react-redux'
-import { useEffect, useState } from 'react'
-import API from '@/services/api'
 import { isEqual, toRupiah } from '@/helpers'
-import { authSignIn } from '@/redux/authSlice'
+import { Card, Woman2 } from '@/public/images'
+import Image from 'next/image'
+import Link from 'next/link'
+import { useEffect, useState } from 'react'
+import { FaArrowLeft, FaPlusCircle, FaSignOutAlt, FaWallet } from 'react-icons/fa'
+import { useSelector } from 'react-redux'
+import '../../app/globals.css'
 
 const Sidebar = ({ 
   type, show, router, onClick }: 
@@ -19,23 +17,17 @@ const Sidebar = ({
     onClick?: any 
   }) => {
 
-  const [dataUser, setDataUser] = useState<Record<string, any>>({})
-
-  const auth = useSelector((state: any) => state.authSlice.auth)
-  const dispatch = useDispatch()
-  console.log('auth', auth)
-
-  useEffect(() => {
-    (async () => {
-      const response = await API.getAccountById(auth?.user_id)
-      if(!isEqual(dataUser, response.data.data)) {
-        dispatch(authSignIn(response.data.data))
-        setDataUser(response.data.data)
+    const [dataUser, setDataUser] = useState<Record<string, any>>({})
+  
+    const auth = useSelector((state: any) => state.authSlice.auth)
+  
+    useEffect(() => {
+      if(!isEqual(dataUser, auth)) {
+        setDataUser(auth)
       }
-    })()
-  }, [dataUser, dispatch])
-
-  switch(type) {
+    }, [auth, dataUser])
+    
+    switch(type) {
     case "auth": 
       return (
         <div className={`fixed flex ${show ? 'z-[99999999] left-[0%] shadow-lg' : 'left-[-100%] md:left-[0%] z-[9999999] '} md:flex bottom-0 w-[80vw] md:w-[26%] bg-blue-200 flex item-center duration-200 justify-center h-screen overflow-hidden`}>
@@ -123,4 +115,4 @@ const Sidebar = ({
   }
 }
 
-export default Sidebar
+export default Sidebar;
