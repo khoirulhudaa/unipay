@@ -1,4 +1,4 @@
-import { isEqual } from '@/helpers'
+import { formatDate, isEqual } from '@/helpers'
 import { KHS } from '@/public/images'
 import API from '@/services/api'
 import Image from 'next/image'
@@ -36,7 +36,7 @@ useEffect(() => {
                             </div>
                             <div>
                                 <h3>{data?.type_payment}</h3>
-                                <small>{data?.date}</small>
+                                <small>{formatDate(data?.date)}</small>
                             </div>
                         </div>
                         <div className='w-max'>
