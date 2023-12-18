@@ -23,12 +23,15 @@ const DynamicTable = dynamic(() => import('../components/table'), {
 
 const Home = () => {
 
-  const [typePayment, setTypePayment] = useState<string>('tf-administration')
+  const [typePaymentSelect, setTypePaymentSelect] = useState<string>('')
+  const [typePayment, setTypePayment] = useState<string>('')
   const [statusModal, setStatusModal] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>("")
   const [show, setShow] = useState<boolean>(false)
   const [update, setUpdate] = useState<boolean>(false)
+  const [detailPayment, setDetailPayment] = useState<boolean>(false)
   const [dataUser, setDataUser] = useState<Record<string, any>>({})
+  const [dataDetailPayment, setDataDetailPayment] = useState<Record<string, any>>({})
 
   const auth = useSelector((state: any) => state.authSlice.auth)
   const dispatch = useDispatch()
@@ -39,10 +42,10 @@ const Home = () => {
       if(!isEqual(dataUser, response.data.data)) {
         dispatch(authSignIn(response.data.data))
         setDataUser(response.data.data)
+        setUpdate(false)
       }
-      setUpdate(false)
     })()
-  }, [dataUser, dispatch, update])
+  }, [dataUser, dispatch, update, auth?.user_id])
 
   const handleFormAdmin = (type: string, typeForm: string ) => {
     localStorage.setItem('typePayment', type)
@@ -75,14 +78,20 @@ const Home = () => {
   }
 
   const handleTypePayment = (typePaymentSelect: string) => {
-    setTypePayment(typePaymentSelect)
+    setTypePaymentSelect(typePaymentSelect)
   }
 
+  const handleDetailPayment = (data: any, condition: boolean) => {
+    console.log(condition)
+    setDetailPayment(condition ?? false)
+    setDataDetailPayment(data)
+  }
+  
   return (
     <div className='relative w-screen h-screen flex'>
 
-      {/* Alert */}
-      <Alert />
+      {/* Alert detail payment*/}
+      <Alert status={detailPayment} onClick={() => setDetailPayment(false)} data={dataDetailPayment} />
       
       {/* Sidebar */}
       <Sidebar show={show} onClickWithdraw={() => handleFormAdmin('Withdraw', 'Withdraw')} onClick={() => handleFormAdmin('Top-up', 'Top-up')} />
@@ -183,7 +192,7 @@ const Home = () => {
                 <p>{dataUser?.accountNumber ? dataUser.accountNumber.replace(/(\d{4})/g, '$1 ') : 0}</p>
               </div>
               <div className='z-[222] absolute text-white md:bottom-[40px] left-[50px]'>
-                <p>Account name</p>
+                <p>Nama akun</p>
                 <small>{dataUser?.fullName}</small>
               </div>
             </div>
@@ -234,7 +243,7 @@ const Home = () => {
                         alt='icon'
                         /> 
                     </div>  
-                    <small className='mt-2 font-normal text-[12px] text-slate-600'>Sertification</small>
+                    <small className='mt-2 font-normal text-[12px] text-slate-600'>Sertifikasi</small>
                   </div>
                 </div>
                 <div className='w-full h-1/2 flex items-center justify-between'>
@@ -245,7 +254,7 @@ const Home = () => {
                         alt='icon'
                         /> 
                     </div>  
-                    <small className='mt-2 font-normal text-[12px] text-slate-600'>Remedial</small>
+                    <small className='mt-2 font-normal text-[12px] text-slate-600'>Perbaikan</small>
                   </div>
                   <div className='text-center flex flex-col items-center justify-center w-[25%] md:w-[50px]'>
                     <div onClick={() => handleFormAdmin('Canteen', 'Canteen')} className='w-[50px] h-[50px] p-3 rounded-full bg-[#38bdf8] border border-white flex items-center justify-center flex-col text-center cursor-pointer hover:brightness-[90%] active:scale-[0.96] duration-100'>
@@ -254,16 +263,7 @@ const Home = () => {
                         alt='icon'
                         /> 
                     </div>  
-                    <small className='mt-2 font-normal text-[12px] text-slate-600'>Canteen</small>
-                  </div>
-                  <div className='text-center flex md:hidden flex-col items-center justify-center w-[25%] md:w-[50px]'>
-                    <div onClick={() => handleFormAdmin('Sertification', 'tf-administration')} className='w-[50px] h-[50px] p-3 rounded-full bg-red-400 border border-white flex items-center justify-center flex-col text-center cursor-pointer hover:brightness-[90%] active:scale-[0.96] duration-100'>
-                      <Image 
-                        src={Sertification}
-                        alt='icon'
-                        />  
-                    </div>  
-                    <small className='mt-2 font-normal text-[12px] text-slate-600'>Sertification</small>
+                    <small className='mt-2 font-normal text-[12px] text-slate-600'>Kantin</small>
                   </div>
                   <div className='text-center flex flex-col items-center justify-center w-[25%] md:w-[50px]'>
                     <div onClick={() => handleFormAdmin('Transfer', 'transfer')} className='w-[50px] h-[50px] p-3 rounded-full bg-yellow-200 border border-white flex items-center justify-center flex-col text-center cursor-pointer hover:brightness-[90%] active:scale-[0.96] duration-100'>
@@ -273,6 +273,8 @@ const Home = () => {
                         />  
                     </div>  
                     <small className='mt-2 font-normal text-[12px] text-slate-600'>Transfer</small>
+                  </div>
+                  <div className='text-center flex md:hidden flex-col items-center justify-center w-[25%] md:w-[50px]'>
                   </div>
                   <div className='w-[50px] h-[50px] p-3 hidden md:flex items-center justify-center flex-col text-center cursor-pointer hover:brightness-[90%] active:scale-[0.96] duration-100'>
                   </div>  
@@ -287,20 +289,25 @@ const Home = () => {
 
         <div className='relative w-full md:w-[92%] ml-auto mr-auto mt-6 mb-[40px]'>
           <div className='w-full mb-6 md:flex items-center justify-between'>
-            <h2 className='text-[26px]'>History</h2>
-            <div className='flex items-center md:mt-0 mt-6'>
-              <div onClick={() => handleTypePayment('Transfer')} className='text-center text-[14px] md:text-[16px] md:ml-5 rounded-full border border-blue-500 bg-blue-500 text-white w-max px-4 py-2 cursor-pointer hover:brightness-[90%] active:scale-[0.96]'>
-                Transfer
-              </div>
-              <div onClick={() => handleTypePayment('Administration')} className='text-center text-[14px] md:text-[16px]  ml-2 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-2 hover:bg-blue-200 cursor-pointer active:scale-[0.96]'>
-                Administrasi
-              </div>
-              <div onClick={() => handleTypePayment('Canteen')} className='text-center text-[14px] md:text-[16px] ml-2 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-2 hover:bg-blue-200 cursor-pointer active:scale-[0.96]'>
-                Canteen
+            <h2 className='text-[26px]'>Riwayat</h2>
+            <div className='overflow-hidden flex items-center md:mt-0 mt-6'>
+              <div className='w-max flex items-center overflow-auto'>
+                <div onClick={() => handleTypePayment('')} className={`text-center text-[14px] md:text-[16px] md:ml-5 rounded-full border border-blue-500 ${typePaymentSelect === '' ? 'bg-blue-500  text-white' : 'bg-transparent hover:bg-blue-200'} w-max px-4 py-2 cursor-pointer active:scale-[0.96]`}>
+                  Semua
+                </div>
+                <div onClick={() => handleTypePayment('Transfer')} className={`text-center text-[14px] md:text-[16px] ml-4 md:ml-5 rounded-full border border-blue-500 ${typePaymentSelect === 'Transfer' ? 'bg-blue-500 text-white' : 'bg-transparent hover:bg-blue-200'} w-max px-4 py-2 cursor-pointer active:scale-[0.96]`}>
+                  <p className='w-max'>Kirim uang</p>
+                </div>
+                <div onClick={() => handleTypePayment('Withdraw')} className={`text-center text-[14px] md:text-[16px] ml-4 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-2 ${typePaymentSelect === 'Withdraw' ? 'bg-blue-500  text-white' : 'bg-transparent hover:bg-blue-200'} cursor-pointer active:scale-[0.96]`}>
+                  Pencairan
+                </div>
+                <div onClick={() => handleTypePayment('Canteen')} className={`text-center text-[14px] md:text-[16px] ml-4 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-2 ${typePaymentSelect === 'Canteen' ? 'bg-blue-500 text-white' : 'bg-transparent hover:bg-blue-200'} cursor-pointer active:scale-[0.96]`}>
+                  Kantin
+                </div>
               </div>
             </div>
           </div>
-          <DynamicTable typePayment={typePayment} />
+          <DynamicTable typePayment={typePaymentSelect} onClick={(data?: any, condition?: any) => handleDetailPayment(data, condition)} />
         </div>
       </div>
 

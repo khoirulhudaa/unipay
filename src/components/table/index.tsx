@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa'
 
-const Table = ({ typePayment }: { typePayment?: string }) => {
+const Table = ({ typePayment, onClick }: { typePayment?: string, onClick?: any }) => {
 
 const [dataHistory, setDataHistory] = useState<[]>([])
 
@@ -19,7 +19,7 @@ useEffect(() => {
             setDataHistory(response.data.data)
         }
     })()
-}, [dataHistory])
+}, [typePayment, dataHistory])
 
 const getImageSrc = (type_payment: string) => {
     switch (type_payment) {
@@ -58,7 +58,7 @@ const getImageSrc = (type_payment: string) => {
                     .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
                     .slice(0, 20)
                     .map((data: any, index: number) => (
-                        <div key={index} className='w-full flex items-center justify-between py-4 duration-100 active:scale-[0.99] border-b border-green-400 mb-2 cursor-pointer'>
+                        <div onClick={() => onClick(data, true)} key={index} className='w-full flex items-center justify-between py-4 duration-100 active:scale-[0.99] border-b md:border-blue-300 border-blue-200 mb-2 cursor-pointer'>
                             <div className='w-max md:w-[40%] flex items-center'>
                                 <div className='w-[50px] h-[50px] mr-3 rounded-full overflow-hidden bg-white p-3 shadow-md'>
                                     <Image 

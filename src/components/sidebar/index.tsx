@@ -22,9 +22,9 @@ const Sidebar = ({
     const [dataUser, setDataUser] = useState<Record<string, any>>({})
   
     const auth = useSelector((state: any) => state.authSlice.auth ?? null)
-  
+    console.log(auth)
     useEffect(() => {
-      if(auth !== 0 && !auth) {
+      if(auth.NIM !== "") {
         (async () => {
           const response = await API.getAccountById(auth?.user_id)
           if(!isEqual(dataUser, response.data.data)) {
@@ -115,7 +115,7 @@ const Sidebar = ({
             <div className='rounded-full cursor-pointer hover:bg-blue-600 active:scale-[0.97] bg-blue-500 text-white tect-center flex items-center justify-center w-[50px] h-[50px] mr-2' onClick={onClick}>
               <FaPlusCircle />
             </div>
-            <Button text='Withdraw' status='primary' style='w-[75%]' handleClick={onClickWithdraw} />
+            <Button text='Pencairan saldo' status='primary' style='w-[75%]' handleClick={onClickWithdraw} />
           </div>
         </div>
       )
