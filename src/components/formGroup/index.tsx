@@ -12,6 +12,7 @@ import { updateProfileUseFormik } from '@/utils/validations/updateProfile'
 import ErrorMessage from '../errorMessage'
 import { useEffect } from 'react'
 import { paymentTopUpUseFormik } from '@/utils/validations/topUpValidation'
+import { paymentCanteenUseFormik } from '@/utils/validations/canteenValidation'
 
 interface formGroupProps {
     type?: string,
@@ -87,6 +88,12 @@ const formikUpdateProfile = updateProfileUseFormik({
     onResponse: handleResponse 
 })
 
+// Transfer update-profile 
+const formikCanteen = paymentCanteenUseFormik({ 
+    onError: handleErrorMessage, 
+    onResponse: handleResponse 
+})
+
 useEffect(() => {
     formikUpdateProfile.setFieldValue('type_photo', typePhoto)
 }, [typePhoto])
@@ -143,6 +150,7 @@ switch(type) {
                         onChange={formikTopUp.handleChange} 
                         onBlur={formikTopUp.handleBlur} 
                         placeholder="XX-20XX-PX" 
+                        value={formikTopUp.values.classRoom}
                     />
                 </div>
                 <div className='flex items-center'>
@@ -176,7 +184,7 @@ switch(type) {
                 </div>
                 <div className='mb-5'>
                     <InputField 
-                        label='Nominal pencairan'
+                        label='Nominal dibayarkan'
                         name='amount'
                         type='number'
                         onError={formikAdmin.errors.amount}
@@ -276,7 +284,7 @@ switch(type) {
                     />
                 </div>
                 <div className='flex items-center'>
-                    <Button text='Kirim sekarang' typeButton='submit' status='primary' style='mr-4' />
+                    <Button text='Ambil sekarang' typeButton='submit' status='primary' style='mr-4' />
                     <Button text='Batalkan' status='delete' handleClick={onClick} />
                 </div>
             </form>
@@ -422,7 +430,7 @@ switch(type) {
                             value={formikSignup.values.accountNumber}
                             placeholder='1212xx23xx233'
                         />
-               Transfer     </div>
+                    </div>
                 </div>
                 <div className='md:flex items-center'>
                     <Button status='primary' typeButton='submit' text='Daftar sekarang' />
@@ -583,6 +591,59 @@ switch(type) {
                 </div>
                 <div className='flex items-center'>
                     <Button status='primary' typeButton='submit' text='Simpan perubahan' />
+                </div>
+            </form>
+        )
+    case "Canteen" :
+        return (
+            <form onSubmit={formikCanteen.handleSubmit} className='z-[999999]'>
+                {
+                    error !== "" ? (
+                        <>
+                        <ErrorMessage error={error} />
+                        </>
+                    ):
+                        null
+                }
+                <div className='mb-5'>
+                    <InputField 
+                        label='Jenis pembayaran'
+                        name='typePayment'
+                        onError={formikCanteen.errors.typePayment}
+                        onTouched={!!formikCanteen.touched.typePayment}
+                        onBlur={formikCanteen.handleBlur} 
+                        disabled={true}
+                        onChange={formikCanteen.handleChange}
+                        value={localStorage.getItem('typePayment') ?? 'Administrasi'}
+                    />
+                </div>
+                <div className='mb-5'>
+                    <InputField 
+                        label='Nominal dibayarkan'
+                        name='amount'
+                        type='number'
+                        onError={formikCanteen.errors.amount}
+                        onTouched={!!formikCanteen.touched.amount}
+                        onChange={formikCanteen.handleChange} 
+                        onBlur={formikCanteen.handleBlur} 
+                        placeholder="1.000" 
+                    />
+                </div>
+                <div className='mb-5'>
+                    <InputField 
+                        label='Membeli apa saja? (Jika perlu)'
+                        name='note'
+                        typeInput='textarea-input'
+                        onError={formikCanteen.errors.note}
+                        onTouched={!!formikCanteen.touched.note}
+                        onChange={formikCanteen.handleChange} 
+                        onBlur={formikCanteen.handleBlur} 
+                        placeholder="Berikan catatan (jika perlu)..." 
+                    />
+                </div>
+                <div className='flex items-center'>
+                    <Button text='Kirim sekarang' typeButton='submit' status='primary' style='mr-4' />
+                    <Button text='Batalkan' status='delete' handleClick={onClick} />
                 </div>
             </form>
         )

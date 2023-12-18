@@ -1,44 +1,47 @@
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { paymentInterface } from '../interfaces/paymentInterface'
-import store from '@/redux/store'
 import API from '@/services/api'
+import store from '@/redux/store'
 
-export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
+export const paymentCanteenUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
 
     const auth = store.getState().authSlice.auth
+
     const formik = useFormik<paymentInterface>({
         initialValues: {
             amount: 0,
-            classRoom: ''
+            note: ''
         },
         validationSchema: Yup.object({
             amount: Yup.number()
-            .min(9999, 'Minimal Rp. 1.000 (one Thousand)')
             .required('Tidak boleh kosong!'),
-            classRoom: Yup.string()
+            note: Yup.string()
             .required('Tidak boleh kosong!')
         }),
         onSubmit: async (values: any, { resetForm }) => {
+
             const data = {
                 amount: values.amount,
                 fullName: auth ? auth.fullName : '',
                 number_telephone: auth ? auth.number_telephone : '',
                 email: auth ? auth.email : '',
-                description: 'TOP-UP',
-                typePayment: 'top-up',
-                NIM: auth ? auth.NIM : '',
-                to: 'Admin Kampus',
+                description: `Kantin`,
+                typePayment: localStorage.getItem('typePayment') ?? '',
                 year: auth ? auth.year : '',
-                classRoom: values.classRoom
+                NIM: auth ? auth.NIM : '',
+                to: 'Kantin kampus',
+                note: values.note,
+                classRoom: '-',
             }
 
-            const response = await API.topUp(data)
-            console.log('response top-up:', response) 
+            console.log('data values:', data)
+
+            const response = await API.transfer(data)
+            console.log('response signup:', response) 
             
-            if(response.data.message === "Your payment is still pending!") {
+            if(response.data.message === 'Your payment is still pending!') {
                 onResponse(response.data.message)
-                console.log('3b')
                 resetForm()
                 const invoiceUrl = response.data.data.invoiceUrl;
                 window.location.href = invoiceUrl;

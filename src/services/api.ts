@@ -25,9 +25,6 @@ const API = {
     },
 
     // payment
-    getAllPayments: () => {
-        return api.get(`/payment`)
-    },
     topUp: (body: any) => {
         return api.post('/payment/top-up', body)
     },
@@ -40,14 +37,6 @@ const API = {
     getAllHistoryPayments: (body?: {}) => {
         return api.get('/payment/history', body)
     },
-
-    // payment methods
-    getAllPaymentMethods: () => {
-        return api.get('payment//methods')
-    },
-    updatePaymentMethods: (body: any) => {
-        return api.put('/payment/update/methods', body)
-    }
 }
 
 export default API;

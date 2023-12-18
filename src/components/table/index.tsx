@@ -1,5 +1,5 @@
 import { formatDate, isEqual } from '@/helpers'
-import { Building, KHS, PKKMB, Sertification, Test, TopUp, Transfer, UP, Withdraw } from '@/public/images'
+import { Building, Canteen, KHS, PKKMB, Sertification, Test, TopUp, Transfer, UP, Withdraw } from '@/public/images'
 import API from '@/services/api'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -41,6 +41,8 @@ const getImageSrc = (type_payment: string) => {
             return UP;
         case 'Withdraw':
             return Withdraw;
+        case 'Canteen':
+            return Canteen;
         default:
             return Test;
     }
