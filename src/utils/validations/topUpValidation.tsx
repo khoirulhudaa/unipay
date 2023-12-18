@@ -14,7 +14,7 @@ export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, on
         },
         validationSchema: Yup.object({
             amount: Yup.number()
-            .min(9999, 'Minimal Rp. 1.000 (one Thousand)')
+            .min(999, 'Minimal Rp. 1.000 (one Thousand)')
             .required('Tidak boleh kosong!'),
             classRoom: Yup.string()
             .required('Tidak boleh kosong!')
