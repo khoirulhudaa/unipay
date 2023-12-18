@@ -129,6 +129,14 @@ switch(type) {
     case "Top-up":
         return (
             <form onSubmit={formikTopUp.handleSubmit} className='z-[999999]'>
+                {
+                    error !== "" ? (
+                        <>
+                        <ErrorMessage error={error} />
+                        </>
+                    ):
+                        null
+                }
                 <div className='mb-5'>
                     <InputField 
                         label='Nominal'
