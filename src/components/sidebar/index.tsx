@@ -1,14 +1,13 @@
 import Button from '@/components/button'
 import { isEqual, toRupiah } from '@/helpers'
 import { Card, Woman2 } from '@/public/images'
+import API from '@/services/api'
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { FaArrowLeft, FaPlusCircle, FaSignOutAlt, FaWallet } from 'react-icons/fa'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import '../../app/globals.css'
-import API from '@/services/api'
-import { authSignIn } from '@/redux/authSlice'
 
 const Sidebar = ({ 
   type, show, router, onClick, onClickWithdraw }: 
@@ -36,7 +35,7 @@ const Sidebar = ({
     switch(type) {
     case "auth": 
       return (
-        <div className={`fixed flex ${show ? 'z-[99999999] left-[0%] shadow-lg' : 'left-[-100%] md:left-[0%] z-[9999999] '} md:flex bottom-0 w-[80vw] md:w-[26%] bg-blue-200 flex item-center duration-200 justify-center h-screen overflow-hidden`}>
+        <div className={`fixed flex ${show ? 'z-[99999999] left-[0%] shadow-lg' : 'left-[-100%] md:left-[0%] z-[9999999] '} md:flex top-0 w-[80vw] md:w-[26%] bg-blue-200 flex item-center duration-200 justify-center h-screen overflow-hidden`}>
 
           <div className='absolute flex items-center justify-between w-full px-5 top-5'>
             <h1 className='text-blue-500 font-bold text-[50px] leading-[1.4em]'>Unipay for Campus.</h1>
