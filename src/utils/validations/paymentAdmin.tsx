@@ -40,8 +40,8 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
             const response = await API.transfer(data)
             console.log('response signup:', response) 
             
-            if(response.data.message === 'Your payment is still pending!') {
-                onResponse(response.data.message)
+            if(response.data.message === 'Your payment success!') {
+                onResponse(response.data.status)
                 resetForm()
                 const invoiceUrl = response.data.data.invoiceUrl;
                 window.location.href = invoiceUrl;

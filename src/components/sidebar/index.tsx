@@ -5,8 +5,10 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { FaArrowLeft, FaPlusCircle, FaSignOutAlt, FaWallet } from 'react-icons/fa'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import '../../app/globals.css'
+import API from '@/services/api'
+import { authSignIn } from '@/redux/authSlice'
 
 const Sidebar = ({ 
   type, show, router, onClick, onClickWithdraw }: 
@@ -23,10 +25,13 @@ const Sidebar = ({
     const auth = useSelector((state: any) => state.authSlice.auth)
   
     useEffect(() => {
-      if(!isEqual(dataUser, auth)) {
-        setDataUser(auth)
-      }
-    }, [auth, dataUser])
+      (async () => {
+        const response = await API.getAccountById(auth?.user_id)
+        if(!isEqual(dataUser, response.data.data)) {
+          setDataUser(response.data.data)
+        }
+      })()
+    }, [dataUser])
     
     switch(type) {
     case "auth": 

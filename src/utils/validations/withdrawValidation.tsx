@@ -49,7 +49,7 @@ export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, 
                 }
 
                 if (auth?.balance >= 10000 && values.amount > auth?.balance) {
-                    formik.setErrors({ amount: `Pencairan maximal ${toRupiah(auth?.balance)}` });
+                    formik.setErrors({ amount: `Pencairan maksimal ${toRupiah(auth?.balance)}` });
                     return; 
                 }else if(values.amount < 9999) {
                     formik.setErrors({ amount: 'Pencairan minimal Rp. 10.000' })
@@ -60,7 +60,7 @@ export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, 
                 }
 
                 const response = await API.disbursement(data)
-                if(response.data.message === "Withdraw successfully!") {
+                if(response.data.message === "Pencairan berhasil!") {
                     resetForm()
                     onResponse(response.data.status)
                 } else {

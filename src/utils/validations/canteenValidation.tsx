@@ -1,8 +1,8 @@
+import store from '@/redux/store'
+import API from '@/services/api'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { paymentInterface } from '../interfaces/paymentInterface'
-import API from '@/services/api'
-import store from '@/redux/store'
 
 export const paymentCanteenUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
 
@@ -35,16 +35,12 @@ export const paymentCanteenUseFormik = ({ onError, onResponse }: {onError: any, 
                 classRoom: '-',
             }
 
-            console.log('data values:', data)
-
             const response = await API.transfer(data)
-            console.log('response signup:', response) 
+            console.log('response canteen:', response) 
             
-            if(response.data.message === 'Your payment is still pending!') {
-                onResponse(response.data.message)
+            if(response.data.message === 'Transaksi berhasil!') {
+                onResponse(response.data.status)
                 resetForm()
-                const invoiceUrl = response.data.data.invoiceUrl;
-                window.location.href = invoiceUrl;
             }else {
                 onError(response.data.message)
             }

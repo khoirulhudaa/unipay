@@ -1,10 +1,10 @@
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { authInterface } from '../interfaces/authInterface'
-import { useEffect } from 'react';
-import API from '@/services/api';
 import store from '@/redux/store';
+import API from '@/services/api';
+import { useFormik } from 'formik';
 import { useParams } from 'next/navigation';
+import { useEffect } from 'react';
+import * as Yup from 'yup';
+import { authInterface } from '../interfaces/authInterface';
 
 export const updateProfileUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
     
@@ -45,9 +45,6 @@ export const updateProfileUseFormik = ({ onError, onResponse }: {onError: any, o
                     number_telephone: values.number_telephone,
                     type_photo: values.type_photo
                 }
-
-                console.log(body)
-                console.log('user_id', user_id)
 
                 const response = await API.updateAccount({user_id, body})
                 console.log('response update:', response) 

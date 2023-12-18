@@ -1,8 +1,8 @@
+import store from '@/redux/store'
+import API from '@/services/api'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { paymentInterface } from '../interfaces/paymentInterface'
-import store from '@/redux/store'
-import API from '@/services/api'
 
 export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
 
@@ -17,16 +17,16 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onRespo
         },
         validationSchema: Yup.object({
             amount: Yup.number()
-            .min(9999, 'Minimal Rp. 1.000 (one Thousand)')
+            .min(999, 'Minimal Rp. 1.000 (one Thousand)')
             .required('Tidak boleh kosong!'),
             to: Yup.string()
-            .min(6, 'Minimal 6 numbers')
-            .max(6, 'Maksimal 6 numbers')
+            .max(8, 'Maksimal 8 numbers')
             .required('Tidak boleh kosong!'),
             classRoom: Yup.string()
             .required('Tidak boleh kosong!')
         }),
         onSubmit: async (values: any, { resetForm }) => {
+            console.log('data transfer1')
 
             const data = {
                 amount: values.amount,
@@ -45,11 +45,9 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onRespo
             const response = await API.transfer(data)
             console.log('response transfer:', response) 
             
-            if(response.data.message === 'Your payment is still pending!') {
-                onResponse(response.data.message)
+            if(response.data.message === 'Transaksi berhasil!') {
+                onResponse(response.data.status)
                 resetForm()
-                const invoiceUrl = response.data.data.invoiceUrl;
-                window.location.href = invoiceUrl;
             }else {
                 onError(response.data.message)
             }

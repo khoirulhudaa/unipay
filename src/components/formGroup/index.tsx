@@ -139,6 +139,7 @@ switch(type) {
                         onChange={formikTopUp.handleChange} 
                         onBlur={formikTopUp.handleBlur} 
                         placeholder="100.000" 
+                        value={formikTopUp.values.amount}
                     />
                 </div>
                 <div className='mb-5'>
@@ -666,6 +667,7 @@ switch(type) {
                 <InputField 
                     label='Nominal dikirim'
                     name='amount'
+                    type='number'
                     onError={formik.errors.amount}
                     onTouched={!!formik.touched.amount}
                     onChange={formik.handleChange}
@@ -683,6 +685,7 @@ switch(type) {
                         onChange={formik.handleChange} 
                         onBlur={formik.handleBlur} 
                         placeholder="XX-20XX-PX" 
+                        value={formik.values.classRoom}
                     />
                 </div>
                 <div className='flex items-center'>

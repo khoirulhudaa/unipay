@@ -27,11 +27,11 @@ const Home = () => {
   const [statusModal, setStatusModal] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>("")
   const [show, setShow] = useState<boolean>(false)
+  const [update, setUpdate] = useState<boolean>(false)
   const [dataUser, setDataUser] = useState<Record<string, any>>({})
 
   const auth = useSelector((state: any) => state.authSlice.auth)
   const dispatch = useDispatch()
-  console.log('auth', auth)
 
   useEffect(() => {
     (async () => {
@@ -40,8 +40,9 @@ const Home = () => {
         dispatch(authSignIn(response.data.data))
         setDataUser(response.data.data)
       }
+      setUpdate(false)
     })()
-  }, [dataUser, dispatch])
+  }, [dataUser, dispatch, update])
 
   const handleFormAdmin = (type: string, typeForm: string ) => {
     localStorage.setItem('typePayment', type)
@@ -55,9 +56,10 @@ const Home = () => {
   }
 
   const handleResponse = (response: any) => {
-    if(response === "Password successfully reset!" || response === 200) {
+    if(response === 200) {
       setErrorMessage("")
       setStatusModal(false)
+      setUpdate(true)
       SweetAlert({
         text:`Transaksi ${typePayment} berhasil!`,
         title: 'Success',

@@ -33,6 +33,10 @@ export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, on
                 classRoom: values.classRoom
             }
 
+            if(values.amount < 9999) {
+                onError('Minimal Rp. 10.000')
+            }
+
             const response = await API.topUp(data)
             console.log('response top-up:', response) 
             
