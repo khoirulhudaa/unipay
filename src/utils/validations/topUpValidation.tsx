@@ -35,20 +35,21 @@ export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, on
 
             if(values.amount < 9999) {
                 onError('Minimal Rp. 10.000')
+            }else {
+                const response = await API.topUp(data)
+                console.log('response top-up:', response) 
+                
+                if(response.data.message === "Your payment is still pending!") {
+                    onResponse(response.data.message)
+                    console.log('3b')
+                    resetForm()
+                    const invoiceUrl = response.data.data.invoiceUrl;
+                    window.location.href = invoiceUrl;
+                }else {
+                    onError(response.data.message)
+                }
             }
 
-            const response = await API.topUp(data)
-            console.log('response top-up:', response) 
-            
-            if(response.data.message === "Your payment is still pending!") {
-                onResponse(response.data.message)
-                console.log('3b')
-                resetForm()
-                const invoiceUrl = response.data.data.invoiceUrl;
-                window.location.href = invoiceUrl;
-            }else {
-                onError(response.data.message)
-            }
         }
     })
 
