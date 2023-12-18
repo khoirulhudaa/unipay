@@ -74,6 +74,10 @@ const Home = () => {
     setErrorMessage(error)
   }
 
+  const handleTypePayment = (typePaymentSelect: string) => {
+    setTypePayment(typePaymentSelect)
+  }
+
   return (
     <div className='relative w-screen h-screen flex'>
 
@@ -285,18 +289,18 @@ const Home = () => {
           <div className='w-full mb-6 md:flex items-center justify-between'>
             <h2 className='text-[26px]'>History</h2>
             <div className='flex items-center md:mt-0 mt-6'>
-              <div className='text-center text-[14px] md:text-[16px] md:ml-5 rounded-full border border-blue-500 bg-blue-500 text-white w-max px-4 py-2 cursor-pointer hover:brightness-[90%] active:scale-[0.96]'>
+              <div onClick={() => handleTypePayment('Transfer')} className='text-center text-[14px] md:text-[16px] md:ml-5 rounded-full border border-blue-500 bg-blue-500 text-white w-max px-4 py-2 cursor-pointer hover:brightness-[90%] active:scale-[0.96]'>
                 Transfer
               </div>
-              <div className='text-center text-[14px] md:text-[16px]  ml-2 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-2 hover:bg-blue-200 cursor-pointer active:scale-[0.96]'>
+              <div onClick={() => handleTypePayment('Administration')} className='text-center text-[14px] md:text-[16px]  ml-2 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-2 hover:bg-blue-200 cursor-pointer active:scale-[0.96]'>
                 Administrasi
               </div>
-              <div className='text-center text-[14px] md:text-[16px] ml-2 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-2 hover:bg-blue-200 cursor-pointer active:scale-[0.96]'>
+              <div onClick={() => handleTypePayment('Canteen')} className='text-center text-[14px] md:text-[16px] ml-2 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-2 hover:bg-blue-200 cursor-pointer active:scale-[0.96]'>
                 Canteen
               </div>
             </div>
           </div>
-          <DynamicTable />
+          <DynamicTable typePayment={typePayment} />
         </div>
       </div>
 

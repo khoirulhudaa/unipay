@@ -21,16 +21,18 @@ const Sidebar = ({
 
     const [dataUser, setDataUser] = useState<Record<string, any>>({})
   
-    const auth = useSelector((state: any) => state.authSlice.auth)
+    const auth = useSelector((state: any) => state.authSlice.auth ?? null)
   
     useEffect(() => {
-      (async () => {
-        const response = await API.getAccountById(auth?.user_id)
-        if(!isEqual(dataUser, response.data.data)) {
-          setDataUser(response.data.data)
-        }
-      })()
-    }, [dataUser])
+      if(auth !== 0 && !auth) {
+        (async () => {
+          const response = await API.getAccountById(auth?.user_id)
+          if(!isEqual(dataUser, response.data.data)) {
+            setDataUser(response.data.data)
+          }
+        })()
+      }
+    }, [])
     
     switch(type) {
     case "auth": 
