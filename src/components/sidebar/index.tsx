@@ -9,12 +9,13 @@ import { useSelector } from 'react-redux'
 import '../../app/globals.css'
 
 const Sidebar = ({ 
-  type, show, router, onClick }: 
+  type, show, router, onClick, onClickWithdraw }: 
   { 
     type?: string, 
     show?: boolean, 
     router?: string, 
-    onClick?: any 
+    onClick?: any,
+    onClickWithdraw?: any
   }) => {
 
     const [dataUser, setDataUser] = useState<Record<string, any>>({})
@@ -108,7 +109,7 @@ const Sidebar = ({
             <div className='rounded-full cursor-pointer hover:bg-blue-600 active:scale-[0.97] bg-blue-500 text-white tect-center flex items-center justify-center w-[50px] h-[50px] mr-2' onClick={onClick}>
               <FaPlusCircle />
             </div>
-            <Button text='Withdraw' status='primary' style='w-[75%]' />
+            <Button text='Withdraw' status='primary' style='w-[75%]' handleClick={onClickWithdraw} />
           </div>
         </div>
       )

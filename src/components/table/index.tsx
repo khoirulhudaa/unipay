@@ -1,5 +1,5 @@
 import { formatDate, isEqual } from '@/helpers'
-import { KHS } from '@/public/images'
+import { Building, KHS, PKKMB, Sertification, Test, TopUp, Transfer, UP, Withdraw } from '@/public/images'
 import API from '@/services/api'
 import Image from 'next/image'
 import { useEffect, useState } from 'react'
@@ -21,16 +21,44 @@ useEffect(() => {
     })()
 }, [dataHistory])
 
+const getImageSrc = (type_payment: string) => {
+    switch (type_payment) {
+        case 'KHS':
+            return KHS;
+        case 'PKKMB':
+            return PKKMB;
+        case 'top-up':
+            return TopUp;
+        case 'Semesteran':
+            return Building;
+        case 'UTS':
+            return Test;
+        case 'Sertification':
+            return Sertification;
+        case 'Transfer':
+            return Transfer;
+        case 'UP':
+            return UP;
+        case 'Withdraw':
+            return Withdraw;
+        default:
+            return Test;
+    }
+}
+
   return (
     <div className='w-full'>
         {
             dataHistory ? (
-                dataHistory.map((data: any, index: number) => (
+                dataHistory
+                .filter((data: any) => data.date && typeof data.date === 'string') 
+                .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                .map((data: any, index: number) => (
                     <div key={index} className='w-full flex items-center justify-between py-4 duration-100 active:scale-[0.99] border-b border-green-400 mb-2 cursor-pointer'>
                         <div className='w-max md:w-[40%] flex items-center'>
-                            <div className='w-[50px] h-[50px] mr-3 rounded-md overflow-hidden bg-white shadow-md'>
+                            <div className='w-[50px] h-[50px] mr-3 rounded-full overflow-hidden bg-white p-3 shadow-md'>
                                 <Image 
-                                    src={KHS}
+                                    src={getImageSrc(data?.type_payment)}
                                     alt='iconTypePayment'
                                 />
                             </div>

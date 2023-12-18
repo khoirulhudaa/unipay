@@ -64,24 +64,24 @@ const formikSignup = signupUseFormik({
     onResponse: handleResponse 
 })
 
-// Transfer withdraw 
+// Transfer signin 
 const formikSignin = signinUseFormik({ 
     onError: handleErrorMessage, 
 })
 
-// Transfer withdraw 
+// Transfer forgot-password 
 const formikForgot = forgotPasswordUseFormik({ 
     onError: handleErrorMessage, 
     onResponse: handleResponse 
 })
 
-// Transfer withdraw 
+// Transfer reset-password 
 const formikResetPassword = resetPasswordUseFormik({ 
     onError: handleErrorMessage, 
     onResponse: handleResponse 
 })
 
-// Transfer withdraw 
+// Transfer update-profile 
 const formikUpdateProfile = updateProfileUseFormik({ 
     onError: handleErrorMessage, 
     onResponse: handleResponse 
@@ -206,7 +206,7 @@ switch(type) {
                 </div>
             </form>
         )
-    case "withdraw":
+    case "Withdraw":
         return (
             <form onSubmit={formikWithdraw.handleSubmit}>
                 <div className='mb-5'>

@@ -22,7 +22,7 @@ export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, 
             bank_code: Yup.string()
             .required(),
             account_number: Yup.number()
-            .max(9999999999999999, 'Masimal 16 karakter.')
+            .max(9999999999999999, 'Maksimal 16 karakter.')
             .min(9999999999, 'Minimal 10 karakter.')
             .required(),
             amount: Yup.number()
@@ -37,8 +37,8 @@ export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, 
                     channelCode: values.bank_code,
                     accountNumber: values.account_number,
                     amount: values.amount,
-                    user_id: auth?.fullName,
-                    accountHolderName: auth?.fullName,
+                    NIM: auth ? auth.NIM : '',
+                    accountHolderName: auth ? auth.fullName : '',
                     classRoom: values.classRoom
                 }
 
@@ -46,6 +46,9 @@ export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, 
 
                 if (values.amount > auth?.balance) {
                     formik.setErrors({ amount: `Withdraw maximal ${toRupiah(auth?.balance)}` });
+                    return; 
+                }else if(values.amount < 9999) {
+                    formik.setErrors({ amount: 'Withdraw minimal Rp. 10.000' })
                     return; 
                 }
 
