@@ -175,7 +175,7 @@ const Home = () => {
               <div className='z-[222] absolute text-white text-[24px] md:bottom-[135px] left-[50px] flex items-center justify-between'>
                 <p>{dataUser?.accountNumber ? dataUser.accountNumber.replace(/(\d{4})/g, '$1 ') : 0}</p>
               </div>
-              <div className='z-[222] absolute text-white md:bottom-[55px] left-[50px]'>
+              <div className='z-[222] absolute text-white md:bottom-[40px] left-[50px]'>
                 <p>Account name</p>
                 <small>{dataUser?.fullName}</small>
               </div>
