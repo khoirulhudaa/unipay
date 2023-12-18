@@ -154,6 +154,14 @@ switch(type) {
     case "tf-administration":
         return (
             <form onSubmit={formikAdmin.handleSubmit} className='z-[999999]'>
+                {
+                    error !== "" ? (
+                        <>
+                        <ErrorMessage error={error} />
+                        </>
+                    ):
+                        null
+                }
                 <div className='mb-5'>
                     <InputField 
                         label='Jenis pembayaran'
@@ -209,6 +217,14 @@ switch(type) {
     case "Withdraw":
         return (
             <form onSubmit={formikWithdraw.handleSubmit}>
+                {
+                    error !== "" ? (
+                        <>
+                        <ErrorMessage error={error} />
+                        </>
+                    ):
+                        null
+                }
                 <div className='mb-5'>
                     <InputField 
                         label='Bank/E-wallet'
@@ -231,6 +247,7 @@ switch(type) {
                         onChange={formikWithdraw.handleChange} 
                         onBlur={formikWithdraw.handleBlur} 
                         placeholder="xx1728712xx273" 
+                        value={formikWithdraw.values.account_number}
                     />
                 </div>
                 <div className='mb-5'>
@@ -243,6 +260,7 @@ switch(type) {
                         onChange={formikWithdraw.handleChange} 
                         onBlur={formikWithdraw.handleBlur} 
                         placeholder="Rp.1.000" 
+                        value={formikWithdraw.values.amount}
                     />
                 </div>
                 <div className='mb-5'>
@@ -254,6 +272,7 @@ switch(type) {
                         onChange={formikWithdraw.handleChange} 
                         onBlur={formikWithdraw.handleBlur} 
                         placeholder="XX-20XX-PX" 
+                        value={formikWithdraw.values.classRoom}
                     />
                 </div>
                 <div className='flex items-center'>

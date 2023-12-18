@@ -54,11 +54,12 @@ const Home = () => {
     setStatusModal(false)
   }
 
-  const handleResponse = (response: string) => {
-    if(response === "Password successfully reset!") {
+  const handleResponse = (response: any) => {
+    if(response === "Password successfully reset!" || response === 200) {
       setErrorMessage("")
+      setStatusModal(false)
       SweetAlert({
-        text:`Pembayaran ${typePayment} berhasil!`,
+        text:`Transaksi ${typePayment} berhasil!`,
         title: 'Success',
         icon: 'success',
         showCancelButton: false,
@@ -129,7 +130,7 @@ const Home = () => {
         </div>
         <div className={`relative w-full md:w-[40%] ${statusModal ? 'bottom-[0%]' : 'bottom-[100%]'} duration-300 ease-in h-screen bg-blue-100 p-6`}>
           {/* form */}
-          <FormGroup type={typePayment} typePayment={typePayment ?? ''} onClick={handleCloseModal} handleResponse={(e) => handleResponse(e)} handleErrorMessage={(e) => handleErrorMessage(e)} />
+          <FormGroup type={typePayment} error={errorMessage} typePayment={typePayment ?? ''} onClick={handleCloseModal} handleResponse={(e) => handleResponse(e)} handleErrorMessage={(e) => handleErrorMessage(e)} />
         </div>
       </div>
 
@@ -182,7 +183,7 @@ const Home = () => {
             </div>
 
             <div className='w-full md:w-[50%] h-[215px]'>
-              <div className='md:w-[103%] w-full z-[4444] h-full py-2 px-2 md:px-8 md:left-[-50px] bg-blue-200 relative bottom-1 rounded-[20px] flex flex-col items-center'>
+              <div className='md:w-[103%] w-full h-full py-2 px-2 md:px-8 md:left-[-50px] bg-blue-200 relative bottom-1 rounded-[20px] flex flex-col items-center'>
                 <div className='w-full h-1/2 flex md:flex-no-wrap flex-wrap items-center justify-between'>
                   <div className='text-center flex flex-col items-center justify-center w-[25%] md:w-[50px]'>
                     <div onClick={() => handleFormAdmin('Semesteran', 'tf-administration')} className='w-[50px] h-[50px] p-3 rounded-full bg-orange-300 border border-white flex items-center justify-center flex-col text-center cursor-pointer hover:brightness-[90%] active:scale-[0.96] duration-100'>
@@ -278,7 +279,7 @@ const Home = () => {
           </div>
         </div>
 
-        <div className='relative w-full md:w-[92%] z-[222222] ml-auto mr-auto mt-6 mb-[40px]'>
+        <div className='relative w-full md:w-[92%] ml-auto mr-auto mt-6 mb-[40px]'>
           <div className='w-full mb-6 md:flex items-center justify-between'>
             <h2 className='text-[26px]'>History</h2>
             <div className='flex items-center md:mt-0 mt-6'>

@@ -53,6 +53,7 @@ const getImageSrc = (type_payment: string) => {
                 dataHistory
                 .filter((data: any) => data.date && typeof data.date === 'string') 
                 .sort((a: any, b: any) => new Date(b.date).getTime() - new Date(a.date).getTime())
+                .slice(0, 20)
                 .map((data: any, index: number) => (
                     <div key={index} className='w-full flex items-center justify-between py-4 duration-100 active:scale-[0.99] border-b border-green-400 mb-2 cursor-pointer'>
                         <div className='w-max md:w-[40%] flex items-center'>
@@ -69,7 +70,7 @@ const getImageSrc = (type_payment: string) => {
                         </div>
                         <div className='w-max'>
                             <div className={`flex items-center w-max ${data.type_payment === 'top-up' ? 'bg-green-400' : 'bg-red-400'} py-2 px-3 text-white rounded-full`}>
-                                <div className='md:flex hidden'>
+                                <div className='flex md:scale-[1] scale-[0.8] mr-1'>
                                     {
                                         data?.type_payment === 'top-up' ? <FaArrowUp /> : <FaArrowDown />
                                     }

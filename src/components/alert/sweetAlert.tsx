@@ -27,6 +27,11 @@ const SweetAlert = ({
 }) => {
 
   const MySwal = withReactContent(Swal);
+
+  const customClasses = {
+    popup: 'z-[9999999999999]',
+    backdrop: 'z-[9999999999]',
+  };
   
   MySwal.fire({
       title: title,
@@ -36,6 +41,7 @@ const SweetAlert = ({
       cancelButtonText,
       showConfirmButton,
       confirmButtonText,
+      customClass: customClasses,
     }).then((result: any) => {
         if (result.isConfirmed) {
             if (route && navigate) {

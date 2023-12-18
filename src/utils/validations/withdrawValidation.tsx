@@ -1,9 +1,9 @@
 import { useFormik } from 'formik';
-import API from '../../services/api';
-import * as Yup from 'yup'
-import { paymentInterface } from '../interfaces/paymentInterface';
-import store from '../../redux/store';
+import * as Yup from 'yup';
 import toRupiah from '../../helpers/toRupiah';
+import store from '../../redux/store';
+import API from '../../services/api';
+import { paymentInterface } from '../interfaces/paymentInterface';
 
 export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, onResponse?: any}) => {
 
@@ -34,28 +34,36 @@ export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, 
         onSubmit: async (values: any, {resetForm}) => {
             try {
                 const data = {
+                    fullName: auth ? auth.fullName : '',
+                    number_telephone: auth ? auth.number_telephone : '',
+                    email: auth ? auth.email : '',
+                    description: `Withdraw`,
+                    typePayment: localStorage.getItem('typePayment') ?? '',
+                    year: auth ? auth.year : '',
+                    note: 'Pencairan saldo unipay',
+                    classRoom: values.classRoom,
                     channelCode: values.bank_code,
                     accountNumber: values.account_number,
                     amount: values.amount,
                     NIM: auth ? auth.NIM : '',
                     accountHolderName: auth ? auth.fullName : '',
-                    classRoom: values.classRoom
                 }
 
-                console.log('values:', data)
-
-                if (values.amount > auth?.balance) {
-                    formik.setErrors({ amount: `Withdraw maximal ${toRupiah(auth?.balance)}` });
+                if (auth?.balance >= 10000 && values.amount > auth?.balance) {
+                    formik.setErrors({ amount: `Pencairan maximal ${toRupiah(auth?.balance)}` });
                     return; 
                 }else if(values.amount < 9999) {
-                    formik.setErrors({ amount: 'Withdraw minimal Rp. 10.000' })
+                    formik.setErrors({ amount: 'Pencairan minimal Rp. 10.000' })
+                    return; 
+                }else if(auth?.balance < 9999) {
+                    formik.setErrors({ amount: 'Saldo tidak cukup!' })
                     return; 
                 }
 
                 const response = await API.disbursement(data)
-                if(response.data.message === "Withdraw successfully!!") {
+                if(response.data.message === "Withdraw successfully!") {
                     resetForm()
-                    onResponse(response.data.message)
+                    onResponse(response.data.status)
                 } else {
                     onError(response.data.message)
                 }
