@@ -47,6 +47,7 @@ const Home = () => {
     localStorage.setItem('typePayment', type)
     setStatusModal(true)
     setTypePayment(typeForm)
+    setShow(false)
   }
 
   const handleCloseModal = () => {
