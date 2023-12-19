@@ -35,7 +35,8 @@ const Home = () => {
 
   const auth = useSelector((state: any) => state.authSlice.auth)
   const dispatch = useDispatch()
-
+  console.log('auth page', auth)
+  
   useEffect(() => {
     (async () => {
       const response = await API.getAccountById(auth?.user_id)
@@ -45,7 +46,7 @@ const Home = () => {
         setUpdate(false)
       }
     })()
-  }, [dataUser, dispatch, update, auth?.user_id])
+  }, [dataUser, dispatch, update])
 
   const handleFormAdmin = (type: string, typeForm: string ) => {
     localStorage.setItem('typePayment', type)
@@ -172,7 +173,7 @@ const Home = () => {
                 {dataUser?.fullName} 
               </p>
               <p className='font-normal bg-blue-300 rounded-full px-4 py-1 text-center text-white md:ml-2'>
-                {dataUser.NIM}
+                {dataUser?.NIM}
               </p>
             </div>
           </div>
