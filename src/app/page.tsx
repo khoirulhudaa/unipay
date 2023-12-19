@@ -46,7 +46,7 @@ const Home = () => {
         setUpdate(false)
       }
     })()
-  }, [dataUser, dispatch, update])
+  })
 
   const handleFormAdmin = (type: string, typeForm: string ) => {
     localStorage.setItem('typePayment', type)
