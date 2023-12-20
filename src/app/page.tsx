@@ -2,7 +2,7 @@
 import Alert from '@/components/alert'
 import SweetAlert from '@/components/alert/sweetAlert'
 import FormGroup from '@/components/formGroup'
-import InputField from '@/components/inputField'
+import ListName from '@/components/listName'
 import Sidebar from '@/components/sidebar'
 import { isEqual } from '@/helpers'
 import { Building, Canteen, PKKMB, Purple2, Sertification, Test, Transfer, UP } from '@/public/images'
@@ -27,6 +27,8 @@ const Home = () => {
   const [typePayment, setTypePayment] = useState<string>('')
   const [statusModal, setStatusModal] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>("")
+  const [nim, setNim] = useState<string>("")
+  const [search, setSearch] = useState<string>("")
   const [show, setShow] = useState<boolean>(false)
   const [update, setUpdate] = useState<boolean>(false)
   const [detailPayment, setDetailPayment] = useState<boolean>(false)
@@ -35,8 +37,7 @@ const Home = () => {
 
   const auth = useSelector((state: any) => state.authSlice.auth)
   const dispatch = useDispatch()
-  console.log('auth page', auth)
-  
+
   useEffect(() => {
     (async () => {
       const response = await API.getAccountById(auth?.user_id)
@@ -46,7 +47,7 @@ const Home = () => {
         setUpdate(false)
       }
     })()
-  })
+  }, [dataUser, dispatch, update, auth?.user_id])
 
   const handleFormAdmin = (type: string, typeForm: string ) => {
     localStorage.setItem('typePayment', type)
@@ -57,6 +58,7 @@ const Home = () => {
 
   const handleCloseModal = () => {
     setStatusModal(false)
+    setErrorMessage('')
   }
 
   const handleResponse = (response: any) => {
@@ -87,6 +89,14 @@ const Home = () => {
     setDetailPayment(condition ?? false)
     setDataDetailPayment(data)
   }
+
+  const handleChangeSearch = (search: string) => {
+    setSearch(search)
+  }
+
+  const handleChangeNIM = (NIM: string) => {
+    setNim(NIM)
+  }
   
   return (
     <div className='relative w-screen h-screen flex'>
@@ -108,45 +118,29 @@ const Home = () => {
       {/* Form sidebar */}
       <div className={`w-full md:w-[74vw] overflow-hidden fixed items-center right-0 flex top-0 h-screen duration-100 ease ${statusModal ? 'z-[999999] bg-blue-500' : 'z-[-1] bg-blue-100'}`}>
         <div className={`w-[60%] md:block hidden relative ${statusModal ? 'top-[0%]' : 'top-[100%]'} duration-300 ease-in h-screen bg-blue-300 bg-opacity-[0.5] p-6`}>
-          <div className='mb-5 text-white'>
-            <InputField 
-              label='Username'
-              name='unipay_id'
-              // onChange={() => null)} 
-              placeholder="Cari nama pengguna..." 
-            />
-          </div>
-          <div className='flex items-center flex-wrap w-full'>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-            <div className='rounded-full mx-2 my-3 cursor-pointer hover:brightness-[90%] active:scale-[0.97] overflow-hidden w-[60px] h-[60px] bg-white'></div>
-          </div>
+          {
+            typePayment === 'transfer' ? (
+              <ListName NIM={nim} onClick={(NIM: string) => handleChangeNIM(NIM)} onChange={(search: string) => handleChangeSearch(search)} search={search} />
+            ):
+            <div className='text-white'>
+              <h2 className='text-[18px] mb-6'>Keterangan :</h2>
+              <p className='mb-4 text-justify text-[14px] font-normal leading-loose'>
+                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
+                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
+                when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
+                It has survived not only five centuries, but also the leap into electronic typesetting, 
+                remaining essentially unchanged. It was popularised in the 1960s with the release of 
+                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop 
+                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              </p>
+              <small className='font-normal text-[12px]'>Sumber: BAU & BAAK</small>
+            </div>
+          }
+
         </div>
         <div className={`relative w-full md:w-[40%] ${statusModal ? 'bottom-[0%]' : 'bottom-[100%]'} duration-300 ease-in h-screen bg-blue-100 p-6`}>
           {/* form */}
-          <FormGroup type={typePayment} error={errorMessage} typePayment={typePayment ?? ''} onClick={handleCloseModal} handleResponse={(e) => handleResponse(e)} handleErrorMessage={(e) => handleErrorMessage(e)} />
+          <FormGroup NIM={nim} type={typePayment} error={errorMessage} typePayment={typePayment ?? ''} onClick={handleCloseModal} handleResponse={(e) => handleResponse(e)} handleErrorMessage={(e) => handleErrorMessage(e)} />
         </div>
       </div>
 

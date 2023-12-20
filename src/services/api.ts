@@ -13,7 +13,10 @@ const API = {
         return api.put(`/account/${user_id}`, body)
     },
     getAccountById: (user_id: string) => {
-        return api.get(`/account/${user_id}`)
+        return api.get(`/account/user/${user_id}`)
+    },
+    getAllUser: () => {
+        return api.get(`/account/list/user`)
     },
 
     // reset-password

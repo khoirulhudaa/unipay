@@ -30,8 +30,16 @@ const Alert: React.FC<alertProps> = ({ data, status, onClick }) => {
                     <p className='overflow-hidden max-w-[90%] whitespace-nowrap overflow-ellipsis'>Waktu : {data?.date ? formatDate(data?.date ?? '') : '-'}</p>
                 </div>
                 <div className='w-full mb-4 border-b border-blue-100 py-4'>
-                    <p className='overflow-hidden max-w-[90%] whitespace-nowrap overflow-ellipsis'>Nama : {data?.fullName ?? '-'}</p>
+                    <p className='overflow-hidden max-w-[90%] whitespace-nowrap overflow-ellipsis'>Pengirim : {data?.fullName ?? '-'}</p>
                 </div>
+                {
+                    data.type_payment === 'Transfer' ? (
+                        <div className='w-full mb-4 border-b border-blue-100 py-4'>
+                            <p className='overflow-hidden max-w-[90%] whitespace-nowrap overflow-ellipsis'>Penerima : {data?.fullName ?? '-'}</p>
+                        </div>
+                    ):
+                        null
+                }
                 <div className='w-full mb-4 border-b border-blue-100 py-4'>
                     <p className='overflow-hidden max-w-[90%] whitespace-nowrap overflow-ellipsis'>Deskripsi : jkdjdksjdksajdsaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</p>
                 </div>

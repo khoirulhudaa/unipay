@@ -3,11 +3,11 @@ import API from '@/services/api'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { paymentInterface } from '../interfaces/paymentInterface'
+import { useEffect } from 'react'
 
-export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
+export const paymentUseFormik = ({ onError, onResponse }: {onError?: any, onResponse?: any}) => {
 
     const auth = store.getState().authSlice.auth
-
     const formik = useFormik<paymentInterface>({
         initialValues: {
             amount: 0,
@@ -26,8 +26,6 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onRespo
             .required('Tidak boleh kosong!')
         }),
         onSubmit: async (values: any, { resetForm }) => {
-            console.log('data transfer1')
-
             const data = {
                 amount: values.amount,
                 email: auth ? auth.email : '',
@@ -45,13 +43,14 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError: any, onRespo
             const response = await API.transfer(data)
             console.log('response transfer:', response) 
             
-            if(response.data.message === 'Transaksi berhasil!') {
+            if(response.data.status === 200) {
                 onResponse(response.data.status)
                 resetForm()
             }else {
                 onError(response.data.message)
             }
         }
+
     })
 
     return formik

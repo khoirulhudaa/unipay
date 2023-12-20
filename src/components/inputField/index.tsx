@@ -100,7 +100,7 @@ const InputField = React.forwardRef(({
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
-                className={`mt-3 bg-white border-0 p-3 w-full outline-2 outline-blue-400 rounded-md ${onError && onTouched ? 'border-red-500 text-red-500' : ''} ${disabled ? 'bg-slate-300 cursor-not-allowed text-slate-500' : '' }`} // Tambahkan kelas sesuai kondisi yang sesuai
+                className={`mt-3 bg-white border-0 p-3 w-full outline-2 outline-blue-400 rounded-md ${onError && onTouched ? 'border-red-500 text-red-500' : 'text-slate-500'} ${disabled ? 'bg-slate-300 cursor-not-allowed text-slate-500' : 'text-slate-500' }`} // Tambahkan kelas sesuai kondisi yang sesuai
                 placeholder={placeholder}
             />
             {

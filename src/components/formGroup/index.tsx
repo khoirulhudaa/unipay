@@ -1,18 +1,18 @@
-import { paymentAdminUseFormik } from '@/utils/validations/paymentAdmin'
-import { paymentUseFormik } from '@/utils/validations/transfer'
-import { paymentWithdrawUseFormik } from '@/utils/validations/withdrawValidation'
-import Button from '../button'
-import InputField from '../inputField'
-import { signupUseFormik } from '@/utils/validations/signupValidation'
-import Link from 'next/link'
-import { signinUseFormik } from '@/utils/validations/signinValidation'
-import { forgotPasswordUseFormik } from '@/utils/validations/forgotPassword'
-import { resetPasswordUseFormik } from '@/utils/validations/resetPassword'
-import { updateProfileUseFormik } from '@/utils/validations/updateProfile'
-import ErrorMessage from '../errorMessage'
-import { useEffect } from 'react'
-import { paymentTopUpUseFormik } from '@/utils/validations/topUpValidation'
 import { paymentCanteenUseFormik } from '@/utils/validations/canteenValidation'
+import { forgotPasswordUseFormik } from '@/utils/validations/forgotPassword'
+import { paymentAdminUseFormik } from '@/utils/validations/paymentAdmin'
+import { resetPasswordUseFormik } from '@/utils/validations/resetPassword'
+import { signinUseFormik } from '@/utils/validations/signinValidation'
+import { signupUseFormik } from '@/utils/validations/signupValidation'
+import { paymentTopUpUseFormik } from '@/utils/validations/topUpValidation'
+import { paymentUseFormik } from '@/utils/validations/transfer'
+import { updateProfileUseFormik } from '@/utils/validations/updateProfile'
+import { paymentWithdrawUseFormik } from '@/utils/validations/withdrawValidation'
+import Link from 'next/link'
+import { useEffect } from 'react'
+import Button from '../button'
+import ErrorMessage from '../errorMessage'
+import InputField from '../inputField'
 
 interface formGroupProps {
     type?: string,
@@ -20,9 +20,9 @@ interface formGroupProps {
     handleResponse?: (args: string) => void,
     typePayment?: string,
     onClick?: () => void,
-    onClick2?: () => void,
     error?: string,
-    typePhoto?: string
+    typePhoto?: string,
+    NIM?: string
 }
 
 const FormGroup = ({ 
@@ -30,9 +30,9 @@ const FormGroup = ({
     handleErrorMessage, 
     handleResponse,
     onClick,
-    onClick2,
     error,
-    typePhoto
+    typePhoto,
+    NIM
 }: formGroupProps) => {
 
 // Transfer original 
@@ -40,6 +40,12 @@ const formik = paymentUseFormik({
     onError: handleErrorMessage, 
     onResponse: handleResponse 
 })
+
+useEffect(() => {
+    if (NIM) {
+        formik.setFieldValue('to', NIM);
+    }
+}, [NIM]);
 
 // Transfer-up 
 const formikTopUp = paymentTopUpUseFormik({ 
@@ -211,6 +217,7 @@ switch(type) {
                         onTouched={!!formikAdmin.touched.note}
                         onChange={formikAdmin.handleChange} 
                         onBlur={formikAdmin.handleBlur} 
+                        value={formikAdmin.values.note}
                         placeholder="Berikan catatan (jika perlu)..." 
                     />
                 </div>
@@ -221,6 +228,7 @@ switch(type) {
                         onError={formikAdmin.errors.classRoom}
                         onTouched={!!formikAdmin.touched.classRoom}
                         onChange={formikAdmin.handleChange} 
+                        value={formikAdmin.values.classRoom}
                         onBlur={formikAdmin.handleBlur} 
                         placeholder="XX-20XX-PX" 
                     />
@@ -549,6 +557,14 @@ switch(type) {
     case "updateProfile" :
         return (
             <form onSubmit={formikUpdateProfile.handleSubmit} className='w-full'>
+                {
+                    error !== "" ? (
+                        <>
+                        <ErrorMessage error={error} />
+                        </>
+                    ):
+                        null
+                }
                 <div className='mb-5 w-full md:pr-8 h-[90px]'>
                     <InputField 
                         label='Nama lengkap'
@@ -599,7 +615,10 @@ switch(type) {
                     />
                 </div>
                 <div className='flex items-center'>
-                    <Button status='primary' typeButton='submit' text='Simpan perubahan' />
+                    <Button status='primary' typeButton='submit' text='Simpan perubahan' style='mr-4' />
+                    <Link href={'/profile'}>
+                        <Button status='delete' text='Batalkan'/>
+                    </Link>
                 </div>
             </form>
         )
@@ -659,30 +678,38 @@ switch(type) {
     default :
         return (
             <form onSubmit={formik.handleSubmit}>
+                {
+                    error !== "" ? (
+                        <>
+                        <ErrorMessage error={error} />
+                        </>
+                    ):
+                        null
+                }
                 <div className='mb-5'>
-                <InputField 
-                    label='NIM penerima'
-                    name='to'
-                    onError={formik.errors.to}
-                    onTouched={!!formik.touched.to}
-                    onChange={formik.handleChange}
-                    value={formik.values.to} 
-                    onBlur={formik.handleBlur} 
-                    placeholder="41xx7627" 
-                />
+                    <InputField 
+                        label='NIM penerima'
+                        name='to'
+                        onError={formik.errors.to}
+                        onTouched={!!formik.touched.to}
+                        onChange={formik.handleChange}
+                        value={formik.values.to} 
+                        onBlur={formik.handleBlur} 
+                        placeholder="41xx7627" 
+                    />
                 </div>
                  <div className='mb-5'>
-                <InputField 
-                    label='Nominal dikirim'
-                    name='amount'
-                    type='number'
-                    onError={formik.errors.amount}
-                    onTouched={!!formik.touched.amount}
-                    onChange={formik.handleChange}
-                    value={formik.values.amount}
-                    onBlur={formik.handleBlur} 
-                    placeholder="1.000" 
-                />
+                    <InputField 
+                        label='Nominal dikirim'
+                        name='amount'
+                        type='number'
+                        onError={formik.errors.amount}
+                        onTouched={!!formik.touched.amount}
+                        onChange={formik.handleChange}
+                        value={formik.values.amount}
+                        onBlur={formik.handleBlur} 
+                        placeholder="1.000" 
+                    />
                 </div>
                 <div className='mb-5'>
                     <InputField 

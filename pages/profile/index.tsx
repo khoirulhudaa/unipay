@@ -37,8 +37,8 @@ const History = () => {
           </div>
         </div>
 
-        <div className='relative md:ml-[26%] w-full md:w-[74%] bg-blue-100 h-screen border-box pb-6 px-6 pt-5'>
-            <div className='relative mt-[30px] md:mt-0 flex items-center justify-center h-[68%] w-full'>
+        <div className='relative md:ml-[26%] w-full bg-blue-100 min-h-screen border-box pb-6 px-6 pt-5'>
+            <div className='relative mt-[30px] md:mt-0 flex items-center justify-center h-[65%] w-full'>
                 <Image 
                   src={dataUser ? `/images/${dataUser.typePhoto}.svg` : 'man1.svg'}
                   alt='faceMemotion'
@@ -46,11 +46,11 @@ const History = () => {
                   layout='fill'
                 />
             </div>
-            <div className='relative bg-blue-300 rounded-[30px] bg-opacity-30 backdrop-blur-lg backdrop-opacity-60 bottom-0 right-0 w-full h-max md:h-[32%] p-6'>
+            <div className='relative bg-blue-200 rounded-[30px] bottom-0 right-0 w-full h-max md:h-[200px] p-6'>
               <div className='md:flex items-center max-w-full md:overflow-hidden'>
                 <div className='text-blue-500'>
                   <h2 className='font-bold text-[24px] md:text-[30px]'>{dataUser ? dataUser.fullName : ''}</h2>
-                  <p className='text-slate-400'>{dataUser ? dataUser.NIM : ''} - {dataUser ? dataUser.prodi : ''}</p>
+                  <p className='text-blue-500'>{dataUser ? dataUser.NIM : ''} - {dataUser ? dataUser.prodi : ''}</p>
                 </div>
                 <Link href={`/profile/${dataUser ? dataUser.user_id : ''}`} className='z-40'>
                   <div className='rounded-full md:mt-0 mt-3 md:ml-[30px] p-1 text-white w-[50px] h-[50px] bg-blue-500 flex items-center justify-center cursor-pointer hover:brightness-[90%] active:scale-[0.97]'>
@@ -60,16 +60,16 @@ const History = () => {
               </div>
               <hr className='my-4' />
               <div className='relative w-full md:w-max h-max flex flex-wrap items-center flex-wrap'>
-                <div className='md:flex hidden rounded-full mr-2 mb-2 bg-blue-300 border border-blue-500 w-max h-max px-5 py-2 text-blue-500 text-center'>
-                  Years, 2021
+                <div className='md:flex hidden rounded-full mr-2 mb-2 bg-blue-400 border border-blue-500 w-max h-max px-5 py-2 text-white text-center'>
+                  Years, {dataUser ? dataUser?.year : ''}
                 </div>
-                <div className='md:flex hidden rounded-full mr-2 mb-2 bg-blue-300 border border-blue-500 w-max h-max px-5 py-2 text-blue-500 text-center'>
+                <div className='md:flex hidden rounded-full mr-2 mb-2 bg-blue-400 border border-blue-500 w-max h-max px-5 py-2 text-white text-center'>
                   Iam {dataUser ? dataUser.gender : ''}
                 </div>
-                <div className='md:flex hidden rounded-full mr-2 mb-2 bg-blue-300 border border-blue-500 w-max h-max px-5 py-2 text-blue-500 text-center'>
+                <div className='md:flex hidden rounded-full mr-2 mb-2 bg-blue-400 border border-blue-500 w-max h-max px-5 py-2 text-white text-center'>
                   IKMI CIREBON
                 </div>
-                <div className='rounded-full mr-2 mb-2 bg-blue-300 border border-blue-500 w-max h-max px-5 py-2 text-blue-500 text-center'>
+                <div className='rounded-full mr-2 mb-2 bg-blue-400 border border-blue-500 w-max h-max px-5 py-2 text-white text-center'>
                 {dataUser ? dataUser.email : ''}
                 </div>
               </div>
