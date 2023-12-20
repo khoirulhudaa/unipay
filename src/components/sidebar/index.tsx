@@ -10,19 +10,19 @@ import { useSelector } from 'react-redux'
 import '../../app/globals.css'
 
 const Sidebar = ({ 
-  type, show, router, onClick, onClickWithdraw }: 
+  type, show, router, onClick, onClickWithdraw, update }: 
   { 
     type?: string, 
     show?: boolean, 
     router?: string, 
     onClick?: any,
-    onClickWithdraw?: any
+    onClickWithdraw?: any,
+    update?: boolean
   }) => {
 
     const [dataUser, setDataUser] = useState<Record<string, any>>({})
   
     const auth = useSelector((state: any) => state.authSlice.auth ?? null)
-    console.log(auth)
     useEffect(() => {
       if(auth.NIM !== "") {
         (async () => {
@@ -32,7 +32,7 @@ const Sidebar = ({
           }
         })()
       }
-    }, [])
+    }, [update])
     
     switch(type) {
     case "auth": 

@@ -105,7 +105,7 @@ const Home = () => {
       <Alert status={detailPayment} onClick={() => setDetailPayment(false)} data={dataDetailPayment} />
       
       {/* Sidebar */}
-      <Sidebar show={show} onClickWithdraw={() => handleFormAdmin('Withdraw', 'Withdraw')} onClick={() => handleFormAdmin('Top-up', 'Top-up')} />
+      <Sidebar update={update} show={show} onClickWithdraw={() => handleFormAdmin('Withdraw', 'Withdraw')} onClick={() => handleFormAdmin('Top-up', 'Top-up')} />
 
       <div className='absolute z-[99999] right-4 top-6 rounded-lg border border-blue-500 w-[50px] h-[50px] flex md:hidden flex-col justify-center items-center cursor-pointer hover:brightness-[90%] active:scale-[0.98]' onClick={() => setShow(!show)}>
         <div className='w-full h-max flex flex-col justify-between items-center justify-between cursor-pointer hover:brightness-[90%] active:scale-[0.98]'>
@@ -302,7 +302,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-          <DynamicTable typePayment={typePaymentSelect} onClick={(data?: any, condition?: any) => handleDetailPayment(data, condition)} />
+          <DynamicTable update={update} typePayment={typePaymentSelect} onClick={(data?: any, condition?: any) => handleDetailPayment(data, condition)} />
         </div>
       </div>
 

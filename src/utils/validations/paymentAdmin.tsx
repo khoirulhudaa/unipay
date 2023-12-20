@@ -3,6 +3,7 @@ import * as Yup from 'yup'
 import { paymentInterface } from '../interfaces/paymentInterface'
 import API from '@/services/api'
 import store from '@/redux/store'
+import { toRupiah } from '@/helpers'
 
 export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
 
@@ -35,16 +36,23 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
                 classRoom: values.classRoom,
             }
 
-            console.log('data values:', data)
+            if (auth?.balance >= 10000 && values.amount > auth?.balance) {
+                formik.setErrors({ amount: `Pengiriman maksimal ${toRupiah(auth?.balance)}` });
+                return; 
+            }else if(values.amount < 999) {
+                formik.setErrors({ amount: 'Pengiriman minimal Rp. 1.000' })
+                return; 
+            }else if(auth?.balance === 0) {
+                formik.setErrors({ amount: 'Saldo tidak cukup!' })
+                return; 
+            }
 
             const response = await API.transfer(data)
-            console.log('response signup:', response) 
+            console.log('response transaksi admin:', response) 
             
             if(response.data.status === 200) {
                 onResponse(response.data.status)
                 resetForm()
-                const invoiceUrl = response.data.data.invoiceUrl;
-                window.location.href = invoiceUrl;
             }else {
                 onError(response.data.message)
             }

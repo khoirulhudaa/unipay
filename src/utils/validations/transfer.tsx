@@ -4,6 +4,7 @@ import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { paymentInterface } from '../interfaces/paymentInterface'
 import { useEffect } from 'react'
+import { toRupiah } from '@/helpers'
 
 export const paymentUseFormik = ({ onError, onResponse }: {onError?: any, onResponse?: any}) => {
 
@@ -38,6 +39,17 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError?: any, onResp
                 year: auth ? auth.year : '',
                 NIM: auth ? auth.NIM : '',
                 classRoom: values.classRoom
+            }
+
+            if (auth?.balance >= 10000 && values.amount > auth?.balance) {
+                formik.setErrors({ amount: `Pengiriman maksimal ${toRupiah(auth?.balance)}` });
+                return; 
+            }else if(values.amount < 999) {
+                formik.setErrors({ amount: 'Pengiriman minimal Rp. 1.000' })
+                return; 
+            }else if(auth?.balance === 0) {
+                formik.setErrors({ amount: 'Saldo tidak cukup!' })
+                return; 
             }
 
             const response = await API.transfer(data)

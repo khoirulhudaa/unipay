@@ -3,6 +3,7 @@ import API from '@/services/api'
 import { useFormik } from 'formik'
 import * as Yup from 'yup'
 import { paymentInterface } from '../interfaces/paymentInterface'
+import { toRupiah } from '@/helpers'
 
 export const paymentCanteenUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
 
@@ -33,6 +34,17 @@ export const paymentCanteenUseFormik = ({ onError, onResponse }: {onError: any, 
                 to: 'Kantin kampus',
                 note: values.note,
                 classRoom: '-',
+            }
+
+            if (auth?.balance >= 10000 && values.amount > auth?.balance) {
+                formik.setErrors({ amount: `Pengiriman maksimal ${toRupiah(auth?.balance)}` });
+                return; 
+            }else if(values.amount < 999) {
+                formik.setErrors({ amount: 'Pengiriman minimal Rp. 1.000' })
+                return; 
+            }else if(auth?.balance === 0) {
+                formik.setErrors({ amount: 'Saldo tidak cukup!' })
+                return; 
             }
 
             const response = await API.transfer(data)

@@ -41,7 +41,6 @@ export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, on
                 
                 if(response.data.message === "Your payment is still pending!") {
                     onResponse(response.data.message)
-                    console.log('3b')
                     resetForm()
                     const invoiceUrl = response.data.data.invoiceUrl;
                     window.location.href = invoiceUrl;

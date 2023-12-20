@@ -5,7 +5,7 @@ import Image from 'next/image'
 import { useEffect, useState } from 'react'
 import { FaArrowDown, FaArrowUp } from 'react-icons/fa'
 
-const Table = ({ typePayment, onClick }: { typePayment?: string, onClick?: any }) => {
+const Table = ({ typePayment, onClick, update }: { typePayment?: string, onClick?: any, update?: boolean }) => {
 
 const [dataHistory, setDataHistory] = useState<[]>([])
 
@@ -19,7 +19,7 @@ useEffect(() => {
             setDataHistory(response.data.data)
         }
     })()
-}, [typePayment, dataHistory])
+}, [typePayment, dataHistory, update])
 
 const getImageSrc = (type_payment: string) => {
     switch (type_payment) {
