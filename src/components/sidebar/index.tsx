@@ -63,7 +63,7 @@ const Sidebar = ({
       )
     case "backToHome":
       return (
-        <div className={`fixed flex ${show ? 'z-[99999999] left-[0%] shadow-lg' : 'left-[-100%] md:left-[0%] z-[9999999] '} md:flex bottom-0 w-[80vw] md:w-[26%] bg-blue-200 duration-200 flex item-center justify-center h-screen overflow-hidden`}>
+        <div className={`fixed flex ${show ? 'z-[99999999] left-[0%] shadow-lg' : 'left-[-100%] md:left-[0%] z-[9999999] '} md:flex top-0 w-[80vw] md:w-[26%] bg-blue-200 duration-200 flex item-center justify-center h-screen overflow-hidden`}>
           <div className='absolute flex items-center justify-between w-full px-5 top-5'>
             <div className='flex items-center w-max rounded-full text-[20px] top-8 bg-white text-blue-500 px-5 py-1 text-center'>
               <p>{toRupiah(dataUser?.balance)}</p>  

@@ -26,6 +26,8 @@ const Auth = () => {
       SweetAlert({
         text:'Berhasil daftar',
         title: 'Success',
+        confirmButtonText: 'Lanjut',
+        showCancelButton: false,
         icon: 'success',
         onClick: () => setStatusAuth(false)
       })

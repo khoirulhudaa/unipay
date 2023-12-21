@@ -11,7 +11,6 @@ import { FaArrowLeft } from 'react-icons/fa'
 
 const ForgotPassword = () => {
 
-const [statusAuth, setStatusAuth] = useState<boolean>(false)
 const [errorMessage, setErrorMessage] = useState<string>("")
 
 const handleResponse = (response: string) => {

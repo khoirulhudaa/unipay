@@ -30,6 +30,7 @@ import Success from './success.svg'
 import TopUp from './topUp.png'
 import Withdraw from './Withdraw.png'
 import Error from './error.png'
+import History from './history.png'
 
 export {
     Card,
@@ -63,5 +64,6 @@ export {
     Success,
     TopUp,
     Withdraw,
-    Error
+    Error,
+    History
 }

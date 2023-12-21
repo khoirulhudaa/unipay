@@ -16,7 +16,7 @@ const Alert: React.FC<alertProps> = ({ data, status, onClick }) => {
                 <FaTimes className='mt-[-3px]' />
             </div>
             <p className='text-slate-500 mt-[60px] md:mt-10'>Total pembayaran</p>
-            <h2 className='mb-4 text-blue-500 text-[30px]'>
+            <h2 className={`mb-4 ${data?.type_payment !== 'top-up' ? 'text-red-500' : 'text-green-500'} text-[30px]`}>
                 {toRupiah(data?.amount ?? 0)}
             </h2>
             <div className='w-full '>
@@ -35,7 +35,7 @@ const Alert: React.FC<alertProps> = ({ data, status, onClick }) => {
                 {
                     data.type_payment === 'Transfer' ? (
                         <div className='w-full mb-4 border-b border-blue-100 py-4'>
-                            <p className='overflow-hidden max-w-[90%] whitespace-nowrap overflow-ellipsis'>Penerima : {data?.fullName ?? '-'}</p>
+                            <p className='overflow-hidden max-w-[90%] whitespace-nowrap overflow-ellipsis'>Penerima : {data?.recipient ?? '-'}</p>
                         </div>
                     ):
                         null

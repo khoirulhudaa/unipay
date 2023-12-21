@@ -423,7 +423,7 @@ switch(type) {
                         />
                     </div>
                 </div>
-                <div className='w-full mb-[40px]'>
+                <div className='w-full md:flex items-center mb-[40px]'>
                     <div className='mb-5 w-full md:w-1/2 md:pr-8 h-[90px]'>
                         <InputField 
                             label='Tahun angkatan'
