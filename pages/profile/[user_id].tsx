@@ -71,7 +71,7 @@ const UpdateProfile = () => {
         </div>
       </div>
 
-      <div className='relative md:ml-[26%] w-full bg-blue-100 h-max md:flex block md:items-center md:min-h-screen border-box pb-6 px-2 md:px-6 pt-5'>
+      <div className='relative md:ml-[26%] w-full bg-blue-100 md:flex block md:items-center min-h-screen border-box pb-6 px-2 md:px-6 pt-5'>
         <div className='retive w-full md:w-1/2 h-max md:pb-0 pb-5 mb-5 md:mb-0 md:h-screen'>
           <div className='relative h-[60%]'>
             <Image 
@@ -83,37 +83,37 @@ const UpdateProfile = () => {
           </div>
           <p className='mb-4 flex md:mt-0 mt-[50px] ml-3 md:hidden'>Foto akun</p>
           <div className='relative flex flex-wrap w-[80%] md:w-[90%] items-center md:mb-0 mb-6 md:justify-center w-full px-2'>
-            <div onClick={() => handleChangeTypePhoto('man1')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'man1' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'man1' ? 'hidden' : ''} cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md shadow-sm overflow-hidden mr-3 mb-3 md:m-3`}>
+            <div onClick={() => handleChangeTypePhoto('man1')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'man1' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'man1' ? 'hidden' : ''} cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md overflow-hidden mr-3 mb-3 md:m-3`}>
               <Image 
                 src={Man1}
                 alt='optionFace'
               />
             </div>
-            <div onClick={() => handleChangeTypePhoto('man2')} className={`w-[50px] h-[50px] md:w-[60px] ${typePhoto === 'man2' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'man2' ? 'hidden' : ''} md:h-[60px] cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md shadow-sm overflow-hidden mr-3 mb-3 md:m-3`}>
+            <div onClick={() => handleChangeTypePhoto('man2')} className={`w-[50px] h-[50px] md:w-[60px] ${typePhoto === 'man2' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'man2' ? 'hidden' : ''} md:h-[60px] cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md overflow-hidden mr-3 mb-3 md:m-3`}>
               <Image 
                 src={Man2}
                 alt='optionFace'
               />
             </div>
-            <div onClick={() => handleChangeTypePhoto('man3')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'man3' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'man3' ? 'hidden' : ''} hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md shadow-sm overflow-hidden mr-3 mb-3 md:m-3`}>
+            <div onClick={() => handleChangeTypePhoto('man3')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'man3' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'man3' ? 'hidden' : ''} hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md overflow-hidden mr-3 mb-3 md:m-3`}>
               <Image 
                 src={Man3}
                 alt='optionFace'
               />
             </div>
-            <div onClick={() => handleChangeTypePhoto('woman1')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'woman1' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'woman1' ? 'hidden' : ''} cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md shadow-sm overflow-hidden mr-3 mb-3 md:m-3`}>
+            <div onClick={() => handleChangeTypePhoto('woman1')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'woman1' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'woman1' ? 'hidden' : ''} cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md overflow-hidden mr-3 mb-3 md:m-3`}>
               <Image 
                 src={Woman1}
                 alt='optionFace'
               />
             </div>
-            <div onClick={() => handleChangeTypePhoto('woman2')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'woman2' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'woman2' ? 'hidden' : ''} cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md shadow-sm overflow-hidden mr-3 mb-3 md:m-3`}>
+            <div onClick={() => handleChangeTypePhoto('woman2')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'woman2' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'woman2' ? 'hidden' : ''} cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md overflow-hidden mr-3 mb-3 md:m-3`}>
               <Image 
                 src={Woman2}
                 alt='optionFace'
               />
             </div>
-            <div onClick={() => handleChangeTypePhoto('woman3')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'woman3' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'woman3' ? 'hidden' : ''} cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md shadow-sm overflow-hidden mr-3 mb-3 md:m-3`}>
+            <div onClick={() => handleChangeTypePhoto('woman3')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'woman3' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'woman3' ? 'hidden' : ''} cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md overflow-hidden mr-3 mb-3 md:m-3`}>
               <Image 
                 src={Woman3}
                 alt='optionFace'
