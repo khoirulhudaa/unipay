@@ -22,7 +22,7 @@ const ResetPassword = () => {
       setErrorMessage("")
       SweetAlert({
         text:'Berhasil perbarui password!',
-        title: 'Success',
+        title: 'Berhasil',
         icon: 'success',
         showCancelButton: false,
         confirmButtonText: 'Masuk kembali',

@@ -18,10 +18,11 @@ const handleResponse = (response: string) => {
         setErrorMessage("")
         SweetAlert({
             text:'Pesan email terkirim!',
-            title: 'Success',
+            title: 'Berhasil',
             icon: 'success',
             showConfirmButton: true,
-            showCancelButton: false
+            showCancelButton: false,
+            confirmButtonText: 'Lanjut',
         })
     }
 }

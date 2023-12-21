@@ -39,9 +39,10 @@ const UpdateProfile = () => {
       setUpdate(true)
       SweetAlert({
         text:'Berhasil perbarui data pribadi!',
-        title: 'Success',
+        title: 'Berhasil',
         icon: 'success',
         showCancelButton: false,
+        confirmButtonText: 'Lanjut',
         navigate: navigate,
         route: '/profile'
       })
@@ -80,7 +81,7 @@ const UpdateProfile = () => {
               objectFit='contain'
             />
           </div>
-          <p className='mb-4 flex ml-3 md:hidden'>Foto akun</p>
+          <p className='mb-4 flex md:mt-0 mt-[50px] ml-3 md:hidden'>Foto akun</p>
           <div className='relative flex flex-wrap w-[80%] md:w-[90%] items-center md:mb-0 mb-6 md:justify-center w-full px-2'>
             <div onClick={() => handleChangeTypePhoto('man1')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'man1' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'man1' ? 'hidden' : ''} cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md shadow-sm overflow-hidden mr-3 mb-3 md:m-3`}>
               <Image 

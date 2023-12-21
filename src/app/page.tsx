@@ -68,7 +68,7 @@ const Home = () => {
       setUpdate(true)
       SweetAlert({
         text:`Transaksi ${typePayment} berhasil!`,
-        title: 'Success',
+        title: 'Berhasil',
         icon: 'success',
         showCancelButton: false,
         confirmButtonText: 'Masuk kembali',

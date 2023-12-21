@@ -24,7 +24,7 @@ const History = () => {
   }, [dataUser])
 
   return (
-    <div className='flex h-max bg-blue-100'>
+    <div className='flex'>
         {/* Sidebar */}
 
         <Sidebar type='backToHome' show={show} />
@@ -38,19 +38,23 @@ const History = () => {
         </div>
 
         <div className='relative md:ml-[26%] w-full bg-blue-100 min-h-screen border-box pb-6 px-6 pt-5'>
-            <div className='relative mt-[30px] md:mt-0 flex items-center justify-center h-[65%] w-full'>
+            <div className='absolute left-4 top-6 md:hidden flex rounded-full mr-2 mb-2 bg-blue-400 border border-blue-500 w-max h-max px-5 py-2 text-white text-center'>
+              {dataUser ? dataUser.NIM : ''}
+            </div>
+            <div className='relative top-[30px] md:top-[-20px] flex items-center justify-center h-[65%] w-full'>
                 <Image 
                   src={dataUser ? `/images/${dataUser.typePhoto}.svg` : 'man1.svg'}
                   alt='faceMemotion'
                   objectFit='contain'
+                  className='relative scale-[1.1]'
                   layout='fill'
                 />
             </div>
-            <div className='relative bg-blue-200 rounded-[30px] bottom-0 right-0 w-full h-max md:h-[200px] p-6'>
+            <div className='relative bg-blue-200 rounded-[30px] shadow-lg w-full h-max md:h-[200px] p-6'>
               <div className='md:flex items-center max-w-full md:overflow-hidden'>
                 <div className='text-blue-500'>
-                  <h2 className='font-bold text-[24px] md:text-[30px]'>{dataUser ? dataUser.fullName : ''}</h2>
-                  <p className='text-blue-500'>{dataUser ? dataUser.NIM : ''} - {dataUser ? dataUser.prodi : ''}</p>
+                  <h2 className='font-bold text-[24px] md:text-[30px] overflow-hidden md:flex max-w-[95%] md:max-w-max whitespace-nowrap overflow-ellipsis'>{dataUser ? dataUser.fullName : ''}</h2>
+                  <p className='text-blue-500 flex items-center overflow-hidden md:flex max-w-[95%] md:max-w-max whitespace-nowrap overflow-ellipsis'><span className='hidden md:flex mr-1'>{dataUser ? dataUser.NIM + ' - ' : ''}</span> {dataUser ? dataUser.prodi : ''}</p>
                 </div>
                 <Link href={`/profile/${dataUser ? dataUser.user_id : ''}`} className='z-40'>
                   <div className='rounded-full md:mt-0 mt-3 md:ml-[30px] p-1 text-white w-[50px] h-[50px] bg-blue-500 flex items-center justify-center cursor-pointer hover:brightness-[90%] active:scale-[0.97]'>
@@ -59,7 +63,7 @@ const History = () => {
                 </Link>
               </div>
               <hr className='my-4' />
-              <div className='relative w-full md:w-max h-max flex flex-wrap items-center flex-wrap'>
+              <div className='relative w-full md:w-max h-max flex flex-wrap items-center flex-wrap overflow-hidden'>
                 <div className='md:flex hidden rounded-full mr-2 mb-2 bg-blue-400 border border-blue-500 w-max h-max px-5 py-2 text-white text-center'>
                   Years, {dataUser ? dataUser?.year : ''}
                 </div>
@@ -69,7 +73,7 @@ const History = () => {
                 <div className='md:flex hidden rounded-full mr-2 mb-2 bg-blue-400 border border-blue-500 w-max h-max px-5 py-2 text-white text-center'>
                   IKMI CIREBON
                 </div>
-                <div className='rounded-full mr-2 mb-2 bg-blue-400 border border-blue-500 w-max h-max px-5 py-2 text-white text-center'>
+                <div className='rounded-full mr-2 mb-2 bg-blue-400 border border-blue-500 overflow-hidden md:flex max-w-[100%] md:max-w-max whitespace-nowrap overflow-ellipsis h-max px-5 py-2 text-white text-center'>
                 {dataUser ? dataUser.email : ''}
                 </div>
               </div>
