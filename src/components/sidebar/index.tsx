@@ -114,7 +114,7 @@ const Sidebar = ({
             className='w-full absolute left-[50%] transform -translate-x-1/2 -translate-y-1/2 top-[50%] hidden md:flex z-[22222222] scale-[1.8] h-auto'
           />
 
-          <div className='md:hidden inline z-40 w-[100%] h-[280px] md:h-[250px] relative'>
+          <div className='md:hidden inline z-40 w-[100%] top-8 h-[280px] md:h-[250px] relative'>
               <Image 
                 src={Blue2}
                 alt='cardImage'
@@ -130,8 +130,8 @@ const Sidebar = ({
           </div>
 
           {/* Close sidebar */}
-          <div onClick={close} className='absolute flex md:hidden items-center bottom-[205px] z-[8888888] right-0 w-max before:h-[80px] before:absolute before:w-[14px] before:bg-white before:rounded-tl-full before:rounded-bl-full before:right-0 px-5 py-4 bg-white rounded-tl-full rounded-bl-full text-center text-blue-500 cursor-pointer active:scale-[0.97] md:hover:brightness-[90%]'>
-            <FaTimes className='relative left-[-4px]' />
+          <div onClick={close} className='absolute flex md:hidden items-center bottom-[205px] z-[8888888] right-0 w-max px-5 py-4 bg-white rounded-tl-full rounded-bl-full text-center text-blue-500 cursor-pointer active:scale-[0.97] md:hover:brightness-[90%]'>
+            <FaTimes />
           </div>
 
           {/* Menu bawah */}
