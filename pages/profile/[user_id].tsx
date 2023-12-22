@@ -7,8 +7,10 @@ import ProviderMain from '@/redux/provider'
 import store from '@/redux/store'
 import API from '@/services/api'
 import Image from 'next/image'
+import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { FaArrowLeft } from 'react-icons/fa'
 import { useDispatch, useSelector } from 'react-redux'
 
 const UpdateProfile = () => {
@@ -63,6 +65,12 @@ const UpdateProfile = () => {
       {/* Sidebar */}
       <Sidebar type='backToHome' router={'/profile'} show={show} />
 
+      <Link href={'/profile'}>
+        <div className='absolute left-4 top-6 z-[44444] rounded-full cursor-pointer hover:bg-blue-500 active:scale-[0.97] bg-blue-400 text-white text-center flex items-center justify-center w-[50px] h-[50px]'>
+          <FaArrowLeft />
+        </div>
+      </Link>
+
       <div className='absolute z-[99999] right-4 top-6 rounded-lg border border-blue-500 w-[50px] h-[50px] flex md:hidden flex-col justify-center items-center cursor-pointer hover:brightness-[90%] active:scale-[0.98]' onClick={() => setShow(!show)}>
         <div className='w-full h-max flex flex-col justify-between items-center justify-between cursor-pointer hover:brightness-[90%] active:scale-[0.98]'>
           <div className='w-[30px] h-[3px] rounded-full bg-blue-400 my-1'></div>
@@ -81,7 +89,7 @@ const UpdateProfile = () => {
               objectFit='contain'
             />
           </div>
-          <p className='mb-4 flex md:mt-0 mt-[50px] ml-3 md:hidden'>Foto akun</p>
+          <p className='mb-4 flex md:mt-0 mt-[85px] ml-3 md:hidden'>Foto akun</p>
           <div className='relative flex flex-wrap w-[80%] md:w-[90%] items-center md:mb-0 mb-6 md:justify-center w-full px-2'>
             <div onClick={() => handleChangeTypePhoto('man1')} className={`w-[50px] h-[50px] md:w-[60px] md:h-[60px] ${typePhoto === 'man1' ? 'border-[2px] border-blue-500 bg-blue-200' : dataUser?.typePhoto === 'man1' ? 'hidden' : ''} cursor-pointer hover:bg-blue-300 hover:border-[2px] hover:border-blue-500 active:scale-[0.97] rounded-md overflow-hidden mr-3 mb-3 md:m-3`}>
               <Image 
