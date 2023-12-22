@@ -17,7 +17,7 @@ import InputField from '../inputField'
 interface formGroupProps {
     type?: string,
     handleErrorMessage?: (args: string) => void,
-    handleResponse?: (args: string) => void,
+    handleResponse?: (args: any) => void,
     typePayment?: string,
     onClick?: () => void,
     error?: string,

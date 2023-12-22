@@ -17,8 +17,8 @@ const ResetPassword = () => {
 
   const [errorMessage, setErrorMessage] = useState<string>("")
 
-  const handleResponse = (response: string) => {
-    if(response === "Password successfully reset!") {
+  const handleResponse = (response: number) => {
+    if(response === 200) {
       setErrorMessage("")
       SweetAlert({
         text:'Berhasil perbarui password!',

@@ -166,7 +166,7 @@ const Home = () => {
               <p className='overflow-hidden md:flex hidden max-w-[94%] whitespace-nowrap overflow-ellipsis'>
                 {dataUser?.fullName} 
               </p>
-              <p className='font-normal bg-blue-300 rounded-full px-4 py-1 text-center text-white md:ml-2'>
+              <p className='font-normal bg-blue-300 rounded-full px-4 py-2 text-center text-white md:ml-2'>
                 {dataUser?.NIM}
               </p>
             </div>
@@ -287,16 +287,16 @@ const Home = () => {
             <h2 className='text-[26px]'>Riwayat</h2>
             <div className='overflow-hidden flex items-center md:mt-0 mt-6'>
               <div className='w-max flex items-center overflow-auto'>
-                <div onClick={() => handleTypePayment('')} className={`text-center text-[14px] md:text-[16px] md:ml-5 rounded-full border border-blue-500 ${typePaymentSelect === '' ? 'bg-blue-500  text-white' : 'bg-transparent hover:bg-blue-200'} w-max px-4 py-2 cursor-pointer active:scale-[0.96]`}>
+                <div onClick={() => handleTypePayment('')} className={`text-center text-[14px] md:text-[16px] md:ml-5 rounded-full border border-blue-500 ${typePaymentSelect === '' ? 'bg-blue-500  text-white' : 'bg-transparent hover:bg-blue-200'} w-max px-4 py-[10px] cursor-pointer active:scale-[0.96]`}>
                   Semua
                 </div>
-                <div onClick={() => handleTypePayment('Transfer')} className={`text-center text-[14px] md:text-[16px] ml-4 md:ml-5 rounded-full border border-blue-500 ${typePaymentSelect === 'Transfer' ? 'bg-blue-500 text-white' : 'bg-transparent hover:bg-blue-200'} w-max px-4 py-2 cursor-pointer active:scale-[0.96]`}>
+                <div onClick={() => handleTypePayment('Transfer')} className={`text-center text-[14px] md:text-[16px] ml-4 md:ml-5 rounded-full border border-blue-500 ${typePaymentSelect === 'Transfer' ? 'bg-blue-500 text-white' : 'bg-transparent hover:bg-blue-200'} w-max px-4 py-[10px] cursor-pointer active:scale-[0.96]`}>
                   <p className='w-max'>Kirim uang</p>
                 </div>
-                <div onClick={() => handleTypePayment('Withdraw')} className={`text-center text-[14px] md:text-[16px] ml-4 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-2 ${typePaymentSelect === 'Withdraw' ? 'bg-blue-500  text-white' : 'bg-transparent hover:bg-blue-200'} cursor-pointer active:scale-[0.96]`}>
+                <div onClick={() => handleTypePayment('Withdraw')} className={`text-center text-[14px] md:text-[16px] ml-4 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-[10px] ${typePaymentSelect === 'Withdraw' ? 'bg-blue-500  text-white' : 'bg-transparent hover:bg-blue-200'} cursor-pointer active:scale-[0.96]`}>
                   Pencairan
                 </div>
-                <div onClick={() => handleTypePayment('Canteen')} className={`text-center text-[14px] md:text-[16px] ml-4 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-2 ${typePaymentSelect === 'Canteen' ? 'bg-blue-500 text-white' : 'bg-transparent hover:bg-blue-200'} cursor-pointer active:scale-[0.96]`}>
+                <div onClick={() => handleTypePayment('Canteen')} className={`text-center text-[14px] md:text-[16px] ml-4 md:ml-5 rounded-full border border-blue-500 w-max px-4 py-[10px] ${typePaymentSelect === 'Canteen' ? 'bg-blue-500 text-white' : 'bg-transparent hover:bg-blue-200'} cursor-pointer active:scale-[0.96]`}>
                   Kantin
                 </div>
               </div>

@@ -13,8 +13,8 @@ const ForgotPassword = () => {
 
 const [errorMessage, setErrorMessage] = useState<string>("")
 
-const handleResponse = (response: string) => {
-    if(response === "Email sent successfully!") {
+const handleResponse = (response: number) => {
+    if(response === 200) {
         setErrorMessage("")
         SweetAlert({
             text:'Pesan email terkirim!',

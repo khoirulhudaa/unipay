@@ -24,7 +24,7 @@ export const resetPasswordUseFormik = ({ onError, onResponse }: {onError: any, o
                     password: values.password
                 }
                 const response = await API.resetPassword({token, body})
-                if(response.data.message === 'Password successfully reset!') {
+                if(response.data.status === 200) {
                     onResponse(response.data.message)
                     resetForm()
                 } else {

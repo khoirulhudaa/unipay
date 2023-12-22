@@ -15,7 +15,7 @@ export const forgotPasswordUseFormik = ({ onError, onResponse }: {onError: any, 
         }),
         onSubmit: async (values: any, { resetForm }) => {
            const response = await API.sendEmailResetPassword(values)
-           if(response.data.message === 'Email sent successfully!') {
+           if(response.data.status === 200) {
                 onResponse(response.data.message)
                 resetForm()
             } else {

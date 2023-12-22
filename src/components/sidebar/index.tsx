@@ -83,14 +83,14 @@ const Sidebar = ({
           <Image 
             src={Card}
             alt='Card-image'
-            className='w-full absolute left-[50%] transform -translate-x-1/2 -translate-y-1/2 top-[50%] z-[2] scale-[1.8] h-auto'
+            className='w-full absolute left-[50%] transform -translate-x-1/2 -translate-y-1/2 top-[50%] z-[222222] scale-[1.8] h-auto'
           />
         </div>
       )
     default :
       return (
         <div className={`fixed flex ${show ? 'z-[99999999] left-[0%] shadow-lg' : 'left-[-100%] md:left-[0%] z-[9999999] '} md:flex bottom-0 w-[80vw] md:w-[26%] bg-blue-200 flex item-center duration-200 justify-center h-screen overflow-hidden`}>
-          <div className='absolute flex items-center justify-between w-full px-5 top-5'>
+          <div className='relative flex items-center justify-between w-full px-5 top-[-220px] z-[3333333]'>
             <div className='flex items-center w-max rounded-full text-[20px] top-8 bg-white text-blue-500 px-5 py-1 text-center'>
               <p>{toRupiah(dataUser?.balance)}</p>  
             </div>
@@ -109,7 +109,7 @@ const Sidebar = ({
           <Image 
             src={Card}
             alt='Card-image'
-            className='w-full absolute left-[50%] transform -translate-x-1/2 -translate-y-1/2 top-[50%] z-[2] scale-[1.8] h-auto'
+            className='w-full absolute left-[50%] transform -translate-x-1/2 -translate-y-1/2 top-[50%] z-[22222222] scale-[1.8] h-auto'
           />
           <div className='bottom-10 z-40 absolute flex items-center justify-between w-full px-5'>
             <div className='rounded-full cursor-pointer hover:bg-blue-600 active:scale-[0.97] bg-blue-500 text-white tect-center flex items-center justify-center w-[50px] h-[50px] mr-2' onClick={onClick}>

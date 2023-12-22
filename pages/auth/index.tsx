@@ -20,8 +20,8 @@ const Auth = () => {
     dispatch(authSignOut())
   }, [])
 
-  const handleResponse = (response: string) => {
-    if(response === "Successfully signup!") {
+  const handleResponse = (response: number) => {
+    if(response === 200) {
       setErrorMessage("")
       SweetAlert({
         text:'Berhasil daftar',

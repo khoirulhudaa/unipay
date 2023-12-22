@@ -39,7 +39,7 @@ export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, on
                 const response = await API.topUp(data)
                 console.log('response top-up:', response) 
                 
-                if(response.data.message === "Your payment is still pending!") {
+                if(response.data.status === 200) {
                     onResponse(response.data.message)
                     resetForm()
                     const invoiceUrl = response.data.data.invoiceUrl;
