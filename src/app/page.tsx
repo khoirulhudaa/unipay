@@ -5,7 +5,7 @@ import FormGroup from '@/components/formGroup'
 import ListName from '@/components/listName'
 import Sidebar from '@/components/sidebar'
 import { isEqual } from '@/helpers'
-import { Building, Canteen, PKKMB, Purple2, Sertification, Test, Transfer, UP } from '@/public/images'
+import { Blue1, Blue2, Brown, Building, Canteen, PKKMB, Purple1, Purple2, Sertification, Test, Transfer, UP } from '@/public/images'
 import { authSignIn } from '@/redux/authSlice'
 import ProviderMain from '@/redux/provider'
 import store from '@/redux/store'
@@ -97,6 +97,10 @@ const Home = () => {
   const handleChangeNIM = (NIM: string) => {
     setNim(NIM)
   }
+
+  const close = () => {
+    setShow(false)
+  }
   
   return (
     <div className='relative w-screen h-screen flex'>
@@ -105,7 +109,7 @@ const Home = () => {
       <Alert status={detailPayment} onClick={() => setDetailPayment(false)} data={dataDetailPayment} />
       
       {/* Sidebar */}
-      <Sidebar update={update} show={show} onClickWithdraw={() => handleFormAdmin('Withdraw', 'Withdraw')} onClick={() => handleFormAdmin('Top-up', 'Top-up')} />
+      <Sidebar close={close} update={update} show={show} onClickWithdraw={() => handleFormAdmin('Withdraw', 'Withdraw')} onClick={() => handleFormAdmin('Top-up', 'Top-up')} />
 
       <div className='absolute z-[99999] right-4 top-6 rounded-lg border border-blue-500 w-[50px] h-[50px] flex md:hidden flex-col justify-center items-center cursor-pointer hover:brightness-[90%] active:scale-[0.98]' onClick={() => setShow(!show)}>
         <div className='w-full h-max flex flex-col justify-between items-center justify-between cursor-pointer hover:brightness-[90%] active:scale-[0.98]'>
@@ -179,7 +183,7 @@ const Home = () => {
             
             <div className='hidden md:inline w-[50%] h-[250px] md:h-[250px] relative'>
               <Image 
-                src={Purple2}
+                src={Blue2}
                 alt='cardImage'
                 className='absolute left-0 top-0 md:mt-[-20px]'
               />
@@ -192,7 +196,7 @@ const Home = () => {
               </div>
             </div>
 
-            <div className='w-full md:w-[50%] h-[215px]'>
+            <div className='w-full md:w-[50%] h-[231px]'>
               <div className='md:w-[103%] w-full h-full py-2 px-2 md:px-8 md:left-[-50px] bg-blue-200 relative bottom-1 rounded-[20px] flex flex-col items-center'>
                 <div className='w-full h-1/2 flex md:flex-no-wrap flex-wrap items-center justify-between'>
                   <div className='text-center flex flex-col items-center justify-center w-[25%] md:w-[50px]'>
