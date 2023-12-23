@@ -41,8 +41,8 @@ const Sidebar = ({
       return (
         <div className={`fixed flex ${show ? 'z-[99999999] left-[0%] shadow-lg' : 'left-[-100%] md:left-[0%] z-[9999999] '} md:flex top-0 w-[80vw] md:w-[26%] bg-blue-200 flex item-center duration-200 justify-center h-screen overflow-hidden`}>
 
-          <div className='absolute flex items-center justify-between w-full px-5 top-5'>
-            <h1 className='text-blue-500 font-bold text-[50px] leading-[1.4em]'>Unipay for Campus.</h1>
+          <div className='absolute flex items-center justify-between w-full text-center px-5 top-5'>
+            <h1 className='text-blue-500 font-bold text-[50px] leading-[1.4em]'>Dompet Unipay</h1>
           </div>
     
           <div className='relative flex items-center justify-center z-[1]'>
@@ -70,9 +70,9 @@ const Sidebar = ({
             <div className='flex items-center w-max rounded-full text-[20px] top-8 bg-white text-blue-500 px-5 py-1 text-center'>
               <p>{toRupiah(dataUser?.balance)}</p>  
             </div>
-            <Link href={router ? router : '/'} className='z-[222]'>
-              <div className='w-[50px] h-[50px] z-[999999] p-2 rounded-full overflow-hidden bg-blue-400 flex items-center justify-center cursor-pointer hover:bg-blue-500 active:scale-[0.96] text-white'>
-                <FaArrowLeft />
+            <Link href={'/auth'} className='z-[2222] md:flex hidden'>
+              <div className='w-[50px] h-[50px] z-[111] p-2 rounded-full overflow-hidden bg-red-400 flex items-center justify-center cursor-pointer hover:bg-red-500 active:scale-[0.96] text-white'>
+                <FaSignOutAlt />
               </div>
             </Link>
           </div>

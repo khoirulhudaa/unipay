@@ -80,6 +80,11 @@ const UpdateProfile = () => {
       </div>
 
       <div className='relative md:ml-[26%] w-full bg-blue-100 md:flex block md:items-center min-h-screen border-box pb-6 px-2 md:px-6 pt-5'>
+        <Link href={'/profile'} className='absolute top-5 z-[999999999]'>
+          <div className='w-[50px] h-[50px] z-[999999] p-2 rounded-full overflow-hidden bg-blue-400 hidden md:flex items-center justify-center cursor-pointer hover:bg-blue-500 active:scale-[0.96] text-white'>
+            <FaArrowLeft />
+          </div>
+        </Link>
         <div className='retive w-full md:w-1/2 h-max md:pb-0 pb-5 mb-5 md:mb-0 md:h-screen'>
           <div className='relative h-[60%]'>
             <Image 

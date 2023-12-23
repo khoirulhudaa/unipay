@@ -42,6 +42,11 @@ const History = () => {
         </div>
 
         <div className='relative md:ml-[26%] w-full bg-blue-100 min-h-screen border-box pb-6 px-6 pt-5'>
+            <Link href={'/'} className='absolute z-[999999999]'>
+              <div className='w-[50px] h-[50px] z-[999999] p-2 rounded-full overflow-hidden bg-blue-400 hidden md:flex items-center justify-center cursor-pointer hover:bg-blue-500 active:scale-[0.96] text-white'>
+                <FaArrowLeft />
+              </div>
+            </Link>
             <div className='relative left-[-5px] flex items-center w-max top-1'>
               <Link href={'/'}>
                 <div className='rounded-full md:hidden flex cursor-pointer hover:bg-blue-500 active:scale-[0.97] bg-blue-400 text-white text-center flex items-center justify-center w-[50px] h-[50px]'>
