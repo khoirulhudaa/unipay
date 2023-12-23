@@ -207,6 +207,7 @@ switch(type) {
                         onChange={formikAdmin.handleChange} 
                         onBlur={formikAdmin.handleBlur} 
                         placeholder="1.000" 
+                        value={formikAdmin.values.amount}
                     />
                 </div>
                 <div className='mb-5'>
@@ -260,6 +261,7 @@ switch(type) {
                         onTouched={!!formikWithdraw.touched.bank_code}
                         onChange={formikWithdraw.handleChange} 
                         onBlur={formikWithdraw.handleBlur} 
+                        value={formikWithdraw.values.bank_code}
                     />
                 </div>
                 <div className='mb-5'>

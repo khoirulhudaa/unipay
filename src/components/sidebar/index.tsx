@@ -66,12 +66,12 @@ const Sidebar = ({
     case "backToHome":
       return (
         <div className={`fixed flex ${show ? 'z-[999999999] left-[0%] shadow-lg' : 'left-[-100%] md:left-[0%] z-[9999999] '} md:flex top-0 w-[100vw] md:w-[26%] bg-blue-200 duration-200 flex item-center justify-center h-screen overflow-hidden`}>
-          <div className='absolute md:flex hidden items-center justify-between w-full px-5 top-5'>
+          <div className='absolute md:flex hidden items-center justify-between z-[99999] w-full px-5 top-5'>
             <div className='flex items-center w-max rounded-full text-[20px] top-8 bg-white text-blue-500 px-5 py-1 text-center'>
               <p>{toRupiah(dataUser?.balance)}</p>  
             </div>
-            <Link href={router ? router : '/'} className='z-40'>
-              <div className='w-[50px] h-[50px] z-[111] p-2 rounded-full overflow-hidden bg-blue-400 flex items-center justify-center cursor-pointer hover:brightnes-[90%] active:scale-[0.96] text-white'>
+            <Link href={router ? router : '/'} className='z-[222]'>
+              <div className='w-[50px] h-[50px] z-[999999] p-2 rounded-full overflow-hidden bg-blue-400 flex items-center justify-center cursor-pointer hover:bg-blue-500 active:scale-[0.96] text-white'>
                 <FaArrowLeft />
               </div>
             </Link>
@@ -86,7 +86,7 @@ const Sidebar = ({
           <Image 
             src={Card}
             alt='Card-image'
-            className='w-full absolute left-[50%] transform -translate-x-1/2 -translate-y-1/2 top-[50%] hidden md:flex z-[22222222] scale-[1.8] h-auto'
+            className='w-full absolute left-[50%] z-[2] transform -translate-x-1/2 -translate-y-1/2 top-[50%] hidden md:flex z-[22222222] scale-[1.8] h-auto'
           />
 
           <div className='md:hidden inline z-40 w-[100%] top-8 h-[280px] md:h-[250px] relative'>
@@ -110,7 +110,7 @@ const Sidebar = ({
           </div>
 
           {/* Menu bawah */}
-          <div className='bottom-10 md:flex hidden z-40 absolute flex items-center justify-between w-full px-5'>
+          <div className='bottom-10 md:hidden flex z-40 absolute flex items-center justify-between w-full px-5'>
             <div className='rounded-full cursor-pointer hover:bg-blue-600 active:scale-[0.97] bg-blue-500 text-white tect-center flex items-center justify-center w-[50px] h-[50px] mr-2' onClick={onClick}>
               <FaPlusCircle />
             </div>
@@ -140,12 +140,12 @@ const Sidebar = ({
     default :
       return (
         <div className={`fixed flex ${show ? 'z-[99999999] left-[0%] shadow-lg' : 'left-[-100%] md:left-[0%] z-[9999999] '} md:flex bottom-0 w-[100vw] md:w-[26%] bg-blue-200 flex item-center duration-200 justify-center h-screen overflow-hidden`}>
-          <div className='absolute md:flex hidden items-center justify-between w-full px-5 top-5'>
+          <div className='absolute md:flex hidden items-center justify-between z-[3333] w-full px-5 top-5'>
             <div className='flex items-center w-max rounded-full text-[20px] top-8 bg-white text-blue-500 px-5 py-1 text-center'>
               <p>{toRupiah(dataUser?.balance)}</p>  
             </div>
-            <Link href={'/auth'} className='z-40 md:flex hidden'>
-              <div className='w-[50px] h-[50px] z-[111] p-2 rounded-full overflow-hidden bg-red-400 flex items-center justify-center cursor-pointer hover:brightnes-[90%] active:scale-[0.96] text-white'>
+            <Link href={'/auth'} className='z-[2222] md:flex hidden'>
+              <div className='w-[50px] h-[50px] z-[111] p-2 rounded-full overflow-hidden bg-red-400 flex items-center justify-center cursor-pointer hover:bg-red-500 active:scale-[0.96] text-white'>
                 <FaSignOutAlt />
               </div>
             </Link>
@@ -160,7 +160,7 @@ const Sidebar = ({
           <Image 
             src={Card}
             alt='Card-image'
-            className='w-full absolute left-[50%] transform -translate-x-1/2 -translate-y-1/2 top-[50%] hidden md:flex z-[22222222] scale-[1.8] h-auto'
+            className='w-full absolute left-[50%] transform -translate-x-1/2 -translate-y-1/2 top-[50%] hidden md:flex z-[2] scale-[1.8] h-auto'
           />
 
           <div className='md:hidden inline z-40 w-[100%] top-8 h-[280px] md:h-[250px] relative'>
