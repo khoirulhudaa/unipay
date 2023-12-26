@@ -115,7 +115,8 @@ const prodiList = [
     {label: 'TI', value: 'Teknik Informatika'},
     {label: 'RPL', value: 'Rekayasa Perangkat Lunak'},
     {label: 'SI', value: 'Sistem Informasi'},
-    {label: 'MK', value: 'Manajemen komputerisasi'}
+    {label: 'MK', value: 'Manajemen Komputerisasi'},
+    {label: 'MI', value: 'Manajemen Informatika'}
 ]
 
 const listPayment = [
@@ -232,6 +233,18 @@ switch(type) {
                         value={formikAdmin.values.classRoom}
                         onBlur={formikAdmin.handleBlur} 
                         placeholder="XX-20XX-PX" 
+                    />
+                </div>
+                <div className='mb-5'>
+                    <InputField 
+                        label='Kode transaksi'
+                        name='code'
+                        onError={formikAdmin.errors.code}
+                        onTouched={!!formikAdmin.touched.code}
+                        onChange={formikAdmin.handleChange} 
+                        value={formikAdmin.values.code}
+                        onBlur={formikAdmin.handleBlur} 
+                        placeholder="contoh: UAS20KJY" 
                     />
                 </div>
                 <div className='flex items-center'>

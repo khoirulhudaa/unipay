@@ -86,7 +86,6 @@ const Home = () => {
   }
 
   const handleDetailPayment = (data: any, condition: boolean) => {
-    console.log(condition)
     setDetailPayment(condition ?? false)
     setDataDetailPayment(data)
   }

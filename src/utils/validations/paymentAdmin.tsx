@@ -12,7 +12,8 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
     const formik = useFormik<paymentInterface>({
         initialValues: {
             amount: 0,
-            note: ''
+            note: '',
+            code: ''
         },
         validationSchema: Yup.object({
             amount: Yup.number()
@@ -33,7 +34,9 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
                 NIM: auth ? auth.NIM : '',
                 to: 'Admin kampus',
                 note: values.note,
+                prodi: auth ? auth.prodi: '',
                 classRoom: values.classRoom,
+                code: values.code
             }
 
             if (auth?.balance >= 10000 && values.amount > auth?.balance) {

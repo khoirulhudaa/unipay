@@ -32,6 +32,7 @@ export const paymentCanteenUseFormik = ({ onError, onResponse }: {onError: any, 
                 year: auth ? auth.year : '',
                 NIM: auth ? auth.NIM : '',
                 to: 'Kantin kampus',
+                prodi: auth ? auth.prodi : '',
                 note: values.note,
                 classRoom: '-',
             }

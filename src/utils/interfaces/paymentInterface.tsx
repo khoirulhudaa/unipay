@@ -9,5 +9,6 @@ export interface paymentInterface {
     classRoom?: string,
     from?: string,
     to?: string,
-    note?: string
+    note?: string,
+    code?: string
 }
