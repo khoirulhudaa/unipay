@@ -48,7 +48,6 @@ export const paymentCanteenUseFormik = ({ onError, onResponse }: {onError: any, 
             }
 
             const response = await API.transfer(data)
-            console.log('response canteen:', response) 
             
             if(response.data.status === 200) {
                 onResponse(response.data.status)

@@ -28,7 +28,6 @@ export const signinUseFormik = ({ onError }: {onError: any}) => {
         }),
         onSubmit: async (values: any, { resetForm }) => {
             const response = await API.signiIn(values)
-            console.log('response signup:', response) 
             
             if(response.data.status === 200) {
                 dispatch(authSignIn(response.data.data))

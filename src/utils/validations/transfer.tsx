@@ -38,6 +38,7 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError?: any, onResp
                 to: values.to,
                 year: auth ? auth.year : '',
                 NIM: auth ? auth.NIM : '',
+                prodi: auth ? auth.prodi : '',
                 classRoom: values.classRoom
             }
 
@@ -53,7 +54,6 @@ export const paymentUseFormik = ({ onError, onResponse }: {onError?: any, onResp
             }
 
             const response = await API.transfer(data)
-            console.log('response transfer:', response) 
             
             if(response.data.status === 200) {
                 onResponse(response.data.status)

@@ -48,7 +48,6 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
             }
 
             const response = await API.transfer(data)
-            console.log('response transaksi admin:', response) 
             
             if(response.data.status === 200) {
                 onResponse(response.data.status)

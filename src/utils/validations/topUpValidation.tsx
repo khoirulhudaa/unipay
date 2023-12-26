@@ -30,6 +30,7 @@ export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, on
                 NIM: auth ? auth.NIM : '',
                 to: 'Admin Kampus',
                 year: auth ? auth.year : '',
+                prodi: auth ? auth.prodi : '',
                 classRoom: values.classRoom
             }
 
@@ -37,7 +38,6 @@ export const paymentTopUpUseFormik = ({ onError, onResponse }: {onError: any, on
                 onError('Minimal Rp. 10.000')
             }else {
                 const response = await API.topUp(data)
-                console.log('response top-up:', response) 
                 
                 if(response.data.status === 200) {
                     onResponse(response.data.message)

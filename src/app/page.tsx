@@ -41,6 +41,7 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       const response = await API.getAccountById(auth?.user_id)
+      console.log('user', response.data.data)
       if(!isEqual(dataUser, response.data.data)) {
         dispatch(authSignIn(response.data.data))
         setDataUser(response.data.data)
@@ -152,7 +153,7 @@ const Home = () => {
       <div className='relative md:ml-[26%] w-full md:w-[74%] bg-blue-100 h-max border-box pb-6 px-4 md:px-6 pt-7 md:pt-5'>
 
         {/* Intro */}
-        <div className='w-full md:w-[80%] md:ml-[30px] flex items-center mb-[40px] md:mb-6 z-[999999]'>
+        <div className='w-full md:w-[93.1%] md:ml-[30px] flex items-center mb-[40px] md:mb-6 z-[999999]'>
           <div>
             <Link href={'/profile'}>
               <div className='w-[50px] h-[50px] overflow-hidden rounded-full bg-slate-400 mr-4 active:scale-[0.98]'>
@@ -165,12 +166,12 @@ const Home = () => {
               </div>
             </Link>
           </div>
-          <div>
-            <div className='md:flex items-center'>
+          <div className='w-full'>
+            <div className='md:flex w-full items-center justify-between'>
               <p className='overflow-hidden md:flex hidden max-w-[94%] whitespace-nowrap overflow-ellipsis'>
                 {dataUser?.fullName} 
               </p>
-              <p className='font-normal bg-blue-300 rounded-full px-4 py-2 text-center text-white md:ml-2'>
+              <p className='font-normal w-max bg-blue-300 rounded-full px-4 py-2 text-center text-white md:ml-2'>
                 {dataUser?.NIM}
               </p>
             </div>

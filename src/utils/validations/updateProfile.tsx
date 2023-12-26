@@ -47,7 +47,6 @@ export const updateProfileUseFormik = ({ onError, onResponse }: {onError: any, o
                 }
 
                 const response = await API.updateAccount({user_id, body})
-                console.log('response update:', response) 
                 
                 if(response.data.status === 200) {
                     onResponse(response.data.message)

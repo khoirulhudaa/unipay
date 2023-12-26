@@ -53,10 +53,9 @@ export const signupUseFormik = ({ onError, onResponse }: {onError: any, onRespon
         }),
         onSubmit: async (values: any, { resetForm }) => {
             const response = await API.signUp(values)
-            console.log('response signup:', response) 
             
             if(response.data.status === 200) {
-                onResponse(response.data.message)
+                onResponse(response.data.status)
                 resetForm()
             }else {
                 onError(response.data.message)
