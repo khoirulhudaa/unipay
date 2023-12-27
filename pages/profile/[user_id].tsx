@@ -35,8 +35,8 @@ const UpdateProfile = () => {
     })()
   }, [update])
 
-  const handleResponse = (response: string) => {
-    if(response === "Successfully for update data account!") {
+  const handleResponse = (response: number) => {
+    if(response === 200) {
       setErrorMessage("")
       setUpdate(true)
       SweetAlert({
@@ -135,7 +135,7 @@ const UpdateProfile = () => {
           </div>
         </div>
         <div className="w-full md:w-1/2 rounded-lg p-2 md:p-4 mt-[-60px]">
-          <FormGroup type='updateProfile' typePhoto={typePhoto} handleErrorMessage={(e) => handleErrorMessage(e)} handleResponse={(e) => handleResponse(e)} error={errorMessage} />
+          <FormGroup type='updateProfile' typePhoto={typePhoto} handleErrorMessage={(e) => handleErrorMessage(e)} handleResponse={(e: number) => handleResponse(e)} error={errorMessage} />
         </div>
       </div>
 

@@ -43,7 +43,7 @@ export const updateProfileUseFormik = ({ onError, onResponse }: {onError: any, o
                     fullName: values.fullName,
                     gender: values.gender,
                     number_telephone: values.number_telephone,
-                    type_photo: values.type_photo && values.type_photo !== '' ? values.type_photo : auth?.typePhoto 
+                    type_photo: values.type_photo && values.type_photo !== '' ? values.type_photo : auth?.typePhoto
                 }
 
                 const response = await API.updateAccount({user_id, body})
