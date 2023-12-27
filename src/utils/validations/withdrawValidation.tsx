@@ -9,8 +9,6 @@ export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, 
 
     const auth = store.getState().authSlice.auth
 
-    console.log('data balance:', auth?.balance)
-
     const formik = useFormik<paymentInterface>({
         initialValues: {
             bank_code: '',
