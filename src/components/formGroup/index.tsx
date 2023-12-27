@@ -37,7 +37,8 @@ const FormGroup = ({
     NIM
 }: formGroupProps) => {
 
-const payment = useSelector((state: any) => state.paymentSlice.systemPayment[0])
+const payment = useSelector((state: any) => state.paymentSlice.systemPayment?.[0])
+console.log('ddd',payment)
 const nominal = payment && payment.length > 0 ? payment.filter((data: any) => data.type_payment === localStorage.getItem('typePayment')) : [{ minimum_payment: 100000 }]
 
 // Transfer original 
@@ -205,7 +206,7 @@ switch(type) {
                 </div>
                 <div className='mb-5'>
                     <InputField 
-                        label={`Nominal - ( ${toRupiah(nominal[0].minimum_payment) || 0} )`}
+                        label={`Nominal - ( ${toRupiah(nominal[0].minimum_payment)} )`}
                         name='amount'
                         type='number'
                         onError={formikAdmin.errors.amount}
