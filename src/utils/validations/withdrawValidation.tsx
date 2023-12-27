@@ -46,6 +46,7 @@ export const paymentWithdrawUseFormik = ({onError, onResponse}: {onError?: any, 
                     amount: values.amount,
                     NIM: auth ? auth.NIM : '',
                     prodi: auth ? auth.prodi : '',
+                    year: auth ? auth.year : '',
                     accountHolderName: auth ? auth.fullName : '',
                 }
 
