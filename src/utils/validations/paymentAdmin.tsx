@@ -40,7 +40,7 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
                 code: values.code
             }
 
-            let nominal = payment.filter((data: any) => data.type_payment === localStorage.getItem('typePayment'))
+            let nominal = payment.length > 0 ? payment?.filter((data: any) => data.type_payment === localStorage.getItem('typePayment')) : 100000
             if (auth?.balance >= 10000 && values.amount > auth?.balance) {
                 formik.setErrors({ amount: `Pengiriman maksimal ${toRupiah(auth?.balance)}` });
                 return; 

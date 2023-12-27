@@ -139,7 +139,7 @@ const Home = () => {
               {
                 dataPayments && dataPayments.length > 0 ? (
                   (() => {
-                    let filteredData = dataPayments.filter((data: any) => data.type_payment === typePaymentNow)
+                    let filteredData = dataPayments && dataPayments?.filter((data: any) => data.type_payment === typePaymentNow)
                     if(filteredData.length > 0) {
                       return filteredData.map((data: any, index: number) => (
                         <p key={index} dangerouslySetInnerHTML={{ __html: data.note_payment }}></p>

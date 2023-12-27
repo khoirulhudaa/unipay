@@ -38,7 +38,7 @@ const FormGroup = ({
 }: formGroupProps) => {
 
 const payment = useSelector((state: any) => state.paymentSlice.systemPayment[0])
-const nominal = payment.filter((data: any) => data.type_payment === localStorage.getItem('typePayment'))
+const nominal = payment ? payment.filter((data: any) => data.type_payment === localStorage.getItem('typePayment')) : 0
 // Transfer original 
 const formik = paymentUseFormik({ 
     onError: handleErrorMessage, 
