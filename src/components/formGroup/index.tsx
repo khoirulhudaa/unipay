@@ -13,6 +13,8 @@ import { useEffect } from 'react'
 import Button from '../button'
 import ErrorMessage from '../errorMessage'
 import InputField from '../inputField'
+import { useSelector } from 'react-redux'
+import { toRupiah } from '@/helpers'
 
 interface formGroupProps {
     type?: string,
@@ -35,6 +37,8 @@ const FormGroup = ({
     NIM
 }: formGroupProps) => {
 
+const payment = useSelector((state: any) => state.paymentSlice.systemPayment[0])
+const nominal = payment.filter((data: any) => data.type_payment === localStorage.getItem('typePayment'))
 // Transfer original 
 const formik = paymentUseFormik({ 
     onError: handleErrorMessage, 
@@ -200,7 +204,7 @@ switch(type) {
                 </div>
                 <div className='mb-5'>
                     <InputField 
-                        label='Nominal dibayarkan'
+                        label={`Nominal - ( ${toRupiah(nominal[0].minimum_payment)} )`}
                         name='amount'
                         type='number'
                         onError={formikAdmin.errors.amount}

@@ -5,7 +5,7 @@ import FormGroup from '@/components/formGroup'
 import ListName from '@/components/listName'
 import Sidebar from '@/components/sidebar'
 import { isEqual } from '@/helpers'
-import { Blue1, Blue2, Brown, Building, Canteen, PKKMB, Purple1, Purple2, Sertification, Test, Transfer, UP } from '@/public/images'
+import { Blue2, Building, Canteen, PKKMB, Sertification, Test, Transfer, UP } from '@/public/images'
 import { authSignIn } from '@/redux/authSlice'
 import ProviderMain from '@/redux/provider'
 import store from '@/redux/store'
@@ -16,6 +16,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import './globals.css'
+import { getSystemPayment } from '@/redux/paymentSlice'
 
 const DynamicTable = dynamic(() => import('../components/table'), {
   ssr: false,
@@ -25,6 +26,7 @@ const Home = () => {
 
   const [typePaymentSelect, setTypePaymentSelect] = useState<string>('')
   const [typePayment, setTypePayment] = useState<string>('')
+  const [typePaymentNow, setTypePaymentNow] = useState<string>('')
   const [statusModal, setStatusModal] = useState<boolean>(false)
   const [errorMessage, setErrorMessage] = useState<string>("")
   const [nim, setNim] = useState<string>("")
@@ -33,6 +35,7 @@ const Home = () => {
   const [update, setUpdate] = useState<boolean>(false)
   const [detailPayment, setDetailPayment] = useState<boolean>(false)
   const [dataUser, setDataUser] = useState<Record<string, any>>({})
+  const [dataPayments, setDataPayments] = useState<[]>([])
   const [dataDetailPayment, setDataDetailPayment] = useState<Record<string, any>>({})
 
   const auth = useSelector((state: any) => state.authSlice.auth)
@@ -41,7 +44,10 @@ const Home = () => {
   useEffect(() => {
     (async () => {
       const response = await API.getAccountById(auth?.user_id)
-      console.log('user', response.data.data)
+      const responsePayments = await API.getAllPayments()
+      setDataPayments(responsePayments.data.data[0].payments)
+      dispatch(getSystemPayment(responsePayments.data.data[0].payments))
+      
       if(!isEqual(dataUser, response.data.data)) {
         dispatch(authSignIn(response.data.data))
         setDataUser(response.data.data)
@@ -54,6 +60,7 @@ const Home = () => {
     localStorage.setItem('typePayment', type)
     setStatusModal(true)
     setTypePayment(typeForm)
+    setTypePaymentNow(type)
     setShow(false)
   }
 
@@ -129,15 +136,27 @@ const Home = () => {
             <div className='text-white'>
               <h2 className='text-[18px] mb-6'>Keterangan :</h2>
               <p className='mb-4 text-justify text-[14px] font-normal leading-loose'>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                It has survived not only five centuries, but also the leap into electronic typesetting, 
-                remaining essentially unchanged. It was popularised in the 1960s with the release of 
-                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop 
-                publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+              {
+                dataPayments && dataPayments.length > 0 ? (
+                  (() => {
+                    let filteredData = dataPayments.filter((data: any) => data.type_payment === typePaymentNow)
+                    if(filteredData.length > 0) {
+                      return filteredData.map((data: any, index: number) => (
+                        <p key={index} dangerouslySetInnerHTML={{ __html: data.note_payment }}></p>
+                      ))
+                    }
+                    return (
+                      <p>
+                        Gunakan saldo anda sebijak mungkin dan bayarlah semua biaya administrasi perkuliahan anda dengan tepat waktu
+                      </p>
+                    )
+                  })()
+                ) : (
+                  null
+                )
+              }
               </p>
-              <small className='font-normal text-[12px]'>Sumber: BAU & BAAK</small>
+              <small className='font-normal text-[12px]'>SUMBER: ADMIN UNIPAY - STMIK IKMI CIREBON</small>
             </div>
           }
 

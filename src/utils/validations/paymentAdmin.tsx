@@ -8,7 +8,8 @@ import { toRupiah } from '@/helpers'
 export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, onResponse: any}) => {
 
     const auth = store.getState().authSlice.auth
-
+    const payment = store.getState().paymentSlice.systemPayment[0]
+    
     const formik = useFormik<paymentInterface>({
         initialValues: {
             amount: 0,
@@ -39,11 +40,12 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
                 code: values.code
             }
 
+            let nominal = payment.filter((data: any) => data.type_payment === localStorage.getItem('typePayment'))
             if (auth?.balance >= 10000 && values.amount > auth?.balance) {
                 formik.setErrors({ amount: `Pengiriman maksimal ${toRupiah(auth?.balance)}` });
                 return; 
-            }else if(values.amount < 999) {
-                formik.setErrors({ amount: 'Pengiriman minimal Rp. 1.000' })
+            }else if(values.amount < nominal[0].minimum_payment) {
+                formik.setErrors({ amount: `Pengiriman minimal ${toRupiah(nominal[0].minimum_payment)}` })
                 return; 
             }else if(auth?.balance === 0) {
                 formik.setErrors({ amount: 'Saldo tidak cukup!' })

@@ -40,6 +40,9 @@ const API = {
     getAllHistoryPayments: (body?: {}) => {
         return api.get('/payment/history', body)
     },
+    getAllPayments: () => {
+        return api.get('/payment/')
+    },
 }
 
 export default API;
