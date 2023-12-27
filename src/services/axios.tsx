@@ -4,7 +4,7 @@ import store from "../redux/store";
 const api = axios.create({
   // baseURL: 'https://be-unipay.vercel.app',
   baseURL: 'https://be-unipay.vercel.app',
-  headers: {
+  headers: {  
     "Content-Type": "application/json",
   }    
 });

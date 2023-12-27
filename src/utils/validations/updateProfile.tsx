@@ -49,7 +49,7 @@ export const updateProfileUseFormik = ({ onError, onResponse }: {onError: any, o
                 const response = await API.updateAccount({user_id, body})
                 
                 if(response.data.status === 200) {
-                    onResponse(response.data.message)
+                    onResponse(response.data.status)
                     resetForm()
                 }else {
                     onError(response.data.message)
