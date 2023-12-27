@@ -12,7 +12,7 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
     
     const formik = useFormik<paymentInterface>({
         initialValues: {
-            amount: 0,
+            amount: 0,  
             note: '',
             code: ''
         },
@@ -40,11 +40,12 @@ export const paymentAdminUseFormik = ({ onError, onResponse }: {onError: any, on
                 code: values.code
             }
 
-            let nominal = payment ? payment.filter((data: any) => data.type_payment === localStorage.getItem('typePayment')) : 100000
+            let nominal = payment && payment.length > 0 ? payment.filter((data: any) => data.type_payment === localStorage.getItem('typePayment')) : 100000
+            
             if (auth?.balance >= 10000 && values.amount > auth?.balance) {
                 formik.setErrors({ amount: `Pengiriman maksimal ${toRupiah(auth?.balance)}` });
                 return; 
-            }else if(values.amount < nominal[0].minimum_payment) {
+            }else if(values.amount < payment && payment.length > 0 ? nominal[0].minimum_payment : 0) {
                 formik.setErrors({ amount: `Pengiriman minimal ${toRupiah(nominal[0].minimum_payment)}` })
                 return; 
             }else if(auth?.balance === 0) {
