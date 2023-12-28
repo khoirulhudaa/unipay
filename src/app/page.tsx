@@ -255,7 +255,7 @@ const Home = () => {
                     <small className='mt-2 font-normal text-[12px] text-slate-600'>UAS</small>
                   </div>
                   <div className='text-center+ hidden md:flex flex-col items-center justify-center w-[25%] md:w-[50px]'>
-                    <div onClick={() => handleFormAdmin('Sertification', 'tf-administration')} className='w-[50px] h-[50px] p-3 rounded-full bg-red-400 border border-white flex items-center justify-center flex-col text-center cursor-pointer hover:brightness-[90%] active:scale-[0.96] duration-100'>
+                    <div onClick={() => handleFormAdmin('Sertifikasi', 'tf-administration')} className='w-[50px] h-[50px] p-3 rounded-full bg-red-400 border border-white flex items-center justify-center flex-col text-center cursor-pointer hover:brightness-[90%] active:scale-[0.96] duration-100'>
                       <Image 
                         src={Sertification}
                         alt='icon'
